@@ -63,6 +63,7 @@ import {
   Lock,
   HelpCircle,
   FileDown,
+  Loader2,
 } from 'lucide-react';
 
 // ============================================
