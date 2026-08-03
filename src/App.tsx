@@ -451,6 +451,7 @@ function App() {
   const [hireMeModalOpen, setHireMeModalOpen] = useState(false);
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
   const [shopifyCaseStudyOpen, setShopifyCaseStudyOpen] = useState(false);
+  const [geoEssentialsCaseStudyOpen, setGeoEssentialsCaseStudyOpen] = useState(false);
   const [serviceModalOpen, setServiceModalOpen] = useState<string | null>(null);
   const [portfolioModalOpen, setPortfolioModalOpen] = useState<string | null>(null);
   const [skillModalOpen, setSkillModalOpen] = useState<string | null>(null);
@@ -1618,6 +1619,68 @@ function App() {
                   <div className="flex items-center gap-3">
                     <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
                     <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 group-hover:gap-3 transition-all flex items-center gap-1.5">
+                      View Full Case Study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          {/* Geo Essentials Featured Case Study */}
+          <div className="mb-10">
+            <button
+              onClick={() => setGeoEssentialsCaseStudyOpen(true)}
+              className="group w-full bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300 text-left border border-blue-100 dark:border-slate-600"
+            >
+              <div className="md:flex">
+                <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden bg-slate-200 dark:bg-slate-700 flex-shrink-0">
+                  <img
+                    src="/screenshots/portfolio/AG_22.png"
+                    alt="Geo Essentials Hero"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-900/20" />
+                  <div className="absolute bottom-3 left-3 flex gap-2">
+                    {['/screenshots/portfolio/AG_20.png', '/screenshots/portfolio/AG_21.png', '/screenshots/portfolio/AG_23.png'].map((src, i) => (
+                      <div key={i} className="w-14 h-10 rounded-lg overflow-hidden ring-2 ring-white/70 shadow-md">
+                        <img src={src} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                    <div className="w-14 h-10 rounded-lg bg-black/50 backdrop-blur-sm ring-2 ring-white/70 flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">+2</span>
+                    </div>
+                  </div>
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow">Case Study</span>
+                  </div>
+                </div>
+                <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Shopify · Tech & Accessories</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Geo Essentials — Tech & Desk Accessories Store</h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                      Designed and built a complete Shopify storefront for a tech accessories brand — featuring a curated homepage, GeoSETUP desk-space collection, trust-badge sections, customer reviews, FAQ, and community email capture.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {['Store Setup', 'Collection Design', 'Homepage UX', 'Trust Badges', 'FAQ Build', 'Community CTA'].map((tag) => (
+                        <span key={tag} className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2.5 py-1 rounded-lg">{tag}</span>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-3 gap-3 mb-5">
+                      {[{ label: 'Collections', value: '3+' }, { label: 'Page Sections', value: '8+' }, { label: 'Screenshots', value: '5' }].map((m) => (
+                        <div key={m.label} className="bg-white dark:bg-slate-700 rounded-xl p-3 text-center shadow-sm">
+                          <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{m.value}</div>
+                          <div className="text-xs text-slate-500 dark:text-slate-400">{m.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
+                    <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
                       View Full Case Study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
@@ -3039,6 +3102,236 @@ function App() {
               <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{s.description}</p>
             </div>
           ))}
+        </div>
+      </Modal>
+
+      {/* ============================================ */}
+      {/* GEO ESSENTIALS CASE STUDY MODAL */}
+      {/* ============================================ */}
+      <Modal
+        isOpen={geoEssentialsCaseStudyOpen}
+        onClose={() => setGeoEssentialsCaseStudyOpen(false)}
+        size="full"
+      >
+        <div className="space-y-0">
+
+          {/* ── HERO HEADER ── */}
+          <div className="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 rounded-2xl overflow-hidden mb-10 p-8 lg:p-12">
+            <div className="absolute inset-0 opacity-10">
+              <img
+                src="/screenshots/portfolio/AG_22.png"
+                alt=""
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div className="relative z-10 max-w-3xl">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-blue-500/20 border border-blue-500/30 text-blue-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Case Study</span>
+                <span className="text-slate-400 text-xs">Shopify · Tech & Accessories</span>
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
+                Geo Essentials<br />
+                <span className="text-blue-400">Tech & Desk Accessories Store</span>
+              </h2>
+              <p className="text-slate-300 text-base leading-relaxed mb-6 max-w-2xl">
+                A full Shopify storefront built for a tech accessories brand. The scope covered homepage architecture, collection design, trust-building sections, customer social proof, FAQ, and community email capture — all crafted to convert browsers into buyers.
+              </p>
+              <div className="flex flex-wrap gap-6 text-sm">
+                {[{ label: 'Platform', value: 'Shopify' }, { label: 'Niche', value: 'Tech Accessories' }, { label: 'Collections', value: '3+' }, { label: 'Page Sections', value: '8+' }].map((s) => (
+                  <div key={s.label}>
+                    <div className="text-slate-400 text-xs mb-0.5">{s.label}</div>
+                    <div className="text-white font-semibold">{s.value}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── SECTION 1: Homepage & Collections ── */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">01 · Homepage & Collections</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">A Clean, Navigable Storefront</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                The homepage was structured around three core collections — Laptop, Smartphone, and Office Desk Essentials — each given a dedicated card for immediate visual hierarchy. The layout ensures shoppers know exactly where to go from the moment they land.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Clear Category Architecture', desc: 'Three prominent collection cards guide visitors to Laptop, Smartphone, and Office Desk Essentials with zero friction' },
+                  { title: 'Brand Identity', desc: 'Consistent "Geo Essentials" branding, color palette, and typography applied site-wide' },
+                  { title: 'Visual Hierarchy', desc: 'Featured products surfaced above the fold with compelling imagery and CTA placement' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img
+                src="/screenshots/portfolio/AG_20.png"
+                alt="Geo Essentials Collections Grid"
+                className="w-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* ── SECTION 2: GeoSETUP Feature ── */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img
+                src="/screenshots/portfolio/AG_21.png"
+                alt="GeoSETUP Desk Space Section"
+                className="w-full object-cover"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">02 · GeoSETUP Collection</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Maximize Desk Space — A Signature Sub-Brand</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                The GeoSETUP section was designed as a lifestyle statement — aspirational desk setup photography paired with a focused "Maximize Desk Space" message. This sub-brand within the store gives workspace accessories a premium identity that resonates with remote workers and creatives.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Lifestyle Photography', desc: 'High-quality desk setup imagery that sells the dream, not just the product' },
+                  { title: 'Sub-brand Positioning', desc: 'GeoSETUP branded as its own collection, reinforcing store depth and specialization' },
+                  { title: 'Conversion-Focused Copy', desc: 'Headlines and CTAs written to motivate add-to-cart from the collection page itself' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* ── SECTION 3: Hero Slider & Trust Badges ── */}
+          <div className="mb-10">
+            <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">03 · Hero Slider & Trust Signals</span>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Building Credibility Above the Fold</h3>
+            <div className="grid lg:grid-cols-5 gap-6 items-start">
+              <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+                <img
+                  src="/screenshots/portfolio/AG_22.png"
+                  alt="Geo Essentials Hero and Trust Badges"
+                  className="w-full object-cover"
+                />
+              </div>
+              <div className="lg:col-span-2 space-y-4">
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  A rotating hero slider was configured to highlight featured products and seasonal promotions, keeping the homepage fresh. Below the hero, a "Featured GEO-Products" strip with trust badges (Free Shipping, Secure Checkout, Easy Returns) was placed to immediately reduce purchase hesitation.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { label: 'Hero Slides', value: 'Dynamic' },
+                    { label: 'Trust Badges', value: '3 placed' },
+                    { label: 'Featured Row', value: 'Above fold' },
+                    { label: 'Load Design', value: 'Mobile-first' },
+                  ].map((s) => (
+                    <div key={s.label} className="bg-slate-50 dark:bg-slate-800 rounded-xl p-3 text-center">
+                      <div className="text-base font-bold text-blue-600 dark:text-blue-400">{s.value}</div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── SECTION 4: Reviews & FAQ ── */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-start">
+            <div>
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">04 · Social Proof & FAQ</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Reviews, Questions, Reassurance</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                A dedicated customer reviews section and a structured FAQ were added to address objections before they stall a purchase. Real testimonials surface social proof; the FAQ eliminates common shipping, returns, and product queries directly on the page.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Customer Reviews Section', desc: 'Testimonials with star ratings displayed in a clean grid to build trust at scale' },
+                  { title: 'FAQ Accordion', desc: 'Expandable Q&A covering shipping, returns, product compatibility, and more' },
+                  { title: 'Objection Handling', desc: 'Every common hesitation addressed before the shopper reaches checkout' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img
+                src="/screenshots/portfolio/AG_23.png"
+                alt="Geo Essentials Reviews and FAQ"
+                className="w-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* ── SECTION 5: Community & Footer ── */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-start">
+            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img
+                src="/screenshots/portfolio/AG_24.png"
+                alt="Geo Essentials Community and Footer"
+                className="w-full object-cover"
+              />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">05 · Community & Footer</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Join the Geo Community</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                The bottom of every page ends with a strong community email capture — "Join the Geo Community" — encouraging repeat engagement and email list growth. The footer was fully structured with navigation links, social handles, and policy pages to give the store a professional, complete feel.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Email Capture CTA', desc: '"Join the Geo Community" section with an inline sign-up form above the footer' },
+                  { title: 'Complete Footer', desc: 'Navigation links, social icons, and policy pages (Refund, Privacy, Terms) all wired up' },
+                  { title: 'Brand Cohesion', desc: 'Footer matches the overall color system and typography so the store feels finished end-to-end' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* ── CLOSING SUMMARY ── */}
+          <div className="bg-gradient-to-br from-blue-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 border border-blue-100 dark:border-slate-700">
+            <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Project Summary</h4>
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+              Geo Essentials was built from the ground up as a conversion-ready Shopify store. Every section — from the hero slider to the community email capture — was purposefully designed to move a visitor from discovery to purchase while establishing the brand's credibility in the tech accessories space.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[
+                { label: 'Platform', value: 'Shopify' },
+                { label: 'Scope', value: 'Full Store Build' },
+                { label: 'Deliverable', value: 'Live-Ready Storefront' },
+              ].map((s) => (
+                <div key={s.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
+                  <div className="text-base font-bold text-blue-600 dark:text-blue-400 mb-1">{s.value}</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </Modal>
 
