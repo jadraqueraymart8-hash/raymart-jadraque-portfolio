@@ -452,6 +452,8 @@ function App() {
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
   const [shopifyCaseStudyOpen, setShopifyCaseStudyOpen] = useState(false);
   const [geoEssentialsCaseStudyOpen, setGeoEssentialsCaseStudyOpen] = useState(false);
+  const [artGeometryCaseStudyOpen, setArtGeometryCaseStudyOpen] = useState(false);
+  const [lumiereBeautyCaseStudyOpen, setLumiereBeautyCaseStudyOpen] = useState(false);
   const [serviceModalOpen, setServiceModalOpen] = useState<string | null>(null);
   const [portfolioModalOpen, setPortfolioModalOpen] = useState<string | null>(null);
   const [skillModalOpen, setSkillModalOpen] = useState<string | null>(null);
@@ -760,17 +762,17 @@ function App() {
     },
     {
       id: 'product-research',
-      title: 'Product Research Reports',
-      platforms: ['Zik Analytics'],
-      description: 'Delivered comprehensive product research with profit margin analysis and competition overview.',
-      overview: 'Ongoing product research for Amazon FBA private label project.',
-      objective: 'Identify 20+ profitable products for private label launch.',
-      responsibilities: ['Market analysis', 'Competitor research', 'Profit calculation', 'Report generation'],
-      process: ['Niche selection', 'Market analysis', 'Competitor deep-dive', 'Profit modeling', 'Recommendation report'],
-      outcome: 'Identified 25 products with 40%+ profit margins.',
-      tools: ['Zik Analytics', 'Jungle Scout', 'Helium 10', 'Google Sheets'],
-      skills: ['Product Research', 'Market Analysis', 'Data Analysis', 'Reporting'],
-      results: ['25 products identified', '40%+ average margin', 'Comprehensive reports', 'Ongoing monitoring'],
+      title: 'Customer Support & Ticket Resolution',
+      platforms: ['Customer Support'],
+      description: 'Resolved customer inquiries regarding orders, refunds, replacements, shipping delays, and account concerns while maintaining high customer satisfaction.',
+      overview: 'Handled end-to-end customer support for e-commerce clients across multiple channels.',
+      objective: 'Resolve customer issues quickly and professionally to maintain satisfaction.',
+      responsibilities: ['Order inquiries', 'Refund processing', 'Replacement coordination', 'Shipping issue resolution', 'Account support'],
+      process: ['Ticket triage', 'Issue investigation', 'Resolution drafting', 'Customer follow-up', 'Escalation handling'],
+      outcome: 'Maintained high customer satisfaction through prompt, professional resolutions.',
+      tools: ['Help Desk Software', 'Email', 'Seller Platforms', 'Google Sheets'],
+      skills: ['Customer Service', 'Problem Solving', 'Communication', 'Ticket Management'],
+      results: ['High satisfaction rate', 'Reduced response time', 'Repeat customer retention', 'Clean resolution records'],
       category: 'Research',
       date: '2024',
       status: 'Ongoing',
@@ -796,17 +798,17 @@ function App() {
     },
     {
       id: 'marketplace-management',
-      title: 'Marketplace Management',
-      platforms: ['Amazon', 'eBay', 'Poshmark'],
-      description: 'Managed multi-platform stores with consistent branding and inventory sync.',
-      overview: 'Complete marketplace management for a clothing and accessories brand.',
-      objective: 'Grow sales across multiple marketplaces while maintaining brand consistency.',
-      responsibilities: ['Account management', 'Listing optimization', 'Customer service', 'Performance monitoring'],
-      process: ['Account audit', 'Optimization plan', 'Implementation', 'Monitoring', 'Reporting'],
-      outcome: 'Doubled revenue across platforms in 6 months.',
-      tools: ['Seller Platforms', 'Help Desk', 'Analytics Tools', 'Inventory Software'],
-      skills: ['Account Management', 'Customer Service', 'Analytics', 'Strategy'],
-      results: ['100% revenue growth', 'Account health maintained', 'Customer satisfaction 4.8/5', 'Expanded to new markets'],
+      title: 'Customer Escalation Management',
+      platforms: ['Customer Escalation Management'],
+      description: 'Coordinated with venues, vendors, and customers to resolve ticket purchase issues, replacement requests, and order disputes through professional communication and problem-solving.',
+      overview: 'Managed complex customer escalations across e-commerce and event ticketing platforms.',
+      objective: 'Resolve escalated disputes and maintain customer relationships under pressure.',
+      responsibilities: ['Escalation triage', 'Vendor coordination', 'Dispute resolution', 'Replacement facilitation', 'Professional communication'],
+      process: ['Issue identification', 'Stakeholder contact', 'Solution negotiation', 'Resolution delivery', 'Follow-up confirmation'],
+      outcome: 'Successfully resolved escalated cases while preserving customer trust and vendor relationships.',
+      tools: ['Help Desk Software', 'Email', 'CRM Tools', 'Communication Platforms'],
+      skills: ['Escalation Handling', 'Negotiation', 'Problem Solving', 'Vendor Relations'],
+      results: ['High resolution rate', 'Maintained vendor partnerships', 'Preserved customer loyalty', 'Reduced repeat escalations'],
       category: 'Management',
       date: '2024',
       status: 'Ongoing',
@@ -1681,6 +1683,112 @@ function App() {
                   <div className="flex items-center gap-3">
                     <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
                     <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                      View Full Case Study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          {/* Art Geometry Featured Card */}
+          <div className="mb-10">
+            <button
+              onClick={() => setArtGeometryCaseStudyOpen(true)}
+              className="group w-full bg-gradient-to-br from-slate-50 to-stone-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-300 text-left border border-stone-200 dark:border-slate-600"
+            >
+              <div className="md:flex">
+                <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden bg-slate-100 dark:bg-slate-700 flex-shrink-0 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div className="w-20 h-20 bg-stone-200 dark:bg-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <FileText className="w-10 h-10 text-stone-500 dark:text-slate-400" />
+                    </div>
+                    <p className="text-stone-400 dark:text-slate-500 text-sm">Screenshots coming soon</p>
+                  </div>
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-stone-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow">Case Study</span>
+                  </div>
+                </div>
+                <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs font-semibold text-stone-600 dark:text-stone-400 uppercase tracking-widest">Shopify · Desk & Lifestyle</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Art Geometry — Minimalist Desk & Lifestyle Store</h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                      Built a full Shopify storefront for a minimalist desk and lifestyle accessories brand — including homepage design, product collections, trust badges, testimonials, and FAQ sections.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {['Shopify', 'Store Setup', 'Collection Mgmt'].map((tag) => (
+                        <span key={tag} className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2.5 py-1 rounded-lg">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
+                    <span className="text-sm font-semibold text-stone-600 dark:text-stone-400 flex items-center gap-1.5">
+                      View Full Case Study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          {/* Lumière Beauty Featured Card */}
+          <div className="mb-10">
+            <button
+              onClick={() => setLumiereBeautyCaseStudyOpen(true)}
+              className="group w-full bg-gradient-to-br from-slate-50 to-rose-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-rose-900/10 transition-all duration-300 text-left border border-rose-100 dark:border-slate-600"
+            >
+              <div className="md:flex">
+                <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden bg-slate-200 dark:bg-slate-700 flex-shrink-0">
+                  <img
+                    src="/screenshots/portfolio/LB_05.png"
+                    alt="Lumière Beauty Hero"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-rose-900/20" />
+                  <div className="absolute bottom-3 left-3 flex gap-2">
+                    {['/screenshots/portfolio/LB_04.png', '/screenshots/portfolio/LB_06.png', '/screenshots/portfolio/LB_07.png'].map((src, i) => (
+                      <div key={i} className="w-14 h-10 rounded-lg overflow-hidden ring-2 ring-white/70 shadow-md">
+                        <img src={src} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                    <div className="w-14 h-10 rounded-lg bg-black/50 backdrop-blur-sm ring-2 ring-white/70 flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">+2</span>
+                    </div>
+                  </div>
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow">Case Study</span>
+                  </div>
+                </div>
+                <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs font-semibold text-rose-600 dark:text-rose-400 uppercase tracking-widest">Shopify · Beauty & Skincare</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Lumière Beauty — Beauty & Skincare Store</h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                      Designed and built a Shopify storefront for a beauty and skincare brand — including hero sections, tabbed product collections, and category navigation.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {['Shopify', 'Store Setup', 'Product Listing'].map((tag) => (
+                        <span key={tag} className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2.5 py-1 rounded-lg">{tag}</span>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-3 gap-3 mb-5">
+                      {[{ label: 'Collections', value: '4+' }, { label: 'Page Sections', value: '6+' }, { label: 'Screenshots', value: '5' }].map((m) => (
+                        <div key={m.label} className="bg-white dark:bg-slate-700 rounded-xl p-3 text-center shadow-sm">
+                          <div className="text-lg font-bold text-rose-600 dark:text-rose-400">{m.value}</div>
+                          <div className="text-xs text-slate-500 dark:text-slate-400">{m.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
+                    <span className="text-sm font-semibold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
                       View Full Case Study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
@@ -3326,6 +3434,284 @@ function App() {
               ].map((s) => (
                 <div key={s.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
                   <div className="text-base font-bold text-blue-600 dark:text-blue-400 mb-1">{s.value}</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </Modal>
+
+      {/* ============================================ */}
+      {/* ART GEOMETRY CASE STUDY MODAL */}
+      {/* ============================================ */}
+      <Modal
+        isOpen={artGeometryCaseStudyOpen}
+        onClose={() => setArtGeometryCaseStudyOpen(false)}
+        size="full"
+      >
+        <div className="space-y-0">
+          {/* Hero Header */}
+          <div className="relative bg-gradient-to-br from-slate-900 via-stone-900 to-slate-900 rounded-2xl overflow-hidden mb-10 p-8 lg:p-12">
+            <div className="relative z-10 max-w-3xl">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-stone-500/20 border border-stone-500/30 text-stone-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Case Study</span>
+                <span className="text-slate-400 text-xs">Shopify · Desk & Lifestyle</span>
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
+                Art Geometry<br />
+                <span className="text-stone-400">Minimalist Desk & Lifestyle Store</span>
+              </h2>
+              <p className="text-slate-300 text-base leading-relaxed mb-6 max-w-2xl">
+                A full Shopify storefront built for a minimalist desk and lifestyle accessories brand. The scope covered homepage design, product collections, trust badges, testimonials, and FAQ sections — all tuned for a clean, focused shopping experience.
+              </p>
+              <div className="flex flex-wrap gap-6 text-sm">
+                {[{ label: 'Platform', value: 'Shopify' }, { label: 'Niche', value: 'Desk & Lifestyle' }, { label: 'Scope', value: 'Full Store Build' }].map((s) => (
+                  <div key={s.label}>
+                    <div className="text-slate-400 text-xs mb-0.5">{s.label}</div>
+                    <div className="text-white font-semibold">{s.value}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Placeholder notice */}
+          <div className="mb-10 bg-stone-50 dark:bg-slate-800 rounded-2xl border-2 border-dashed border-stone-300 dark:border-slate-600 p-12 text-center">
+            <div className="w-16 h-16 bg-stone-200 dark:bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <FileText className="w-8 h-8 text-stone-400 dark:text-slate-500" />
+            </div>
+            <h4 className="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">Screenshots Coming Soon</h4>
+            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-sm mx-auto">Screenshots for Art Geometry will be uploaded here to complete this case study.</p>
+          </div>
+
+          {/* What was built */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+            {[
+              { title: 'Homepage Design', desc: 'Clean, minimal homepage structured to guide visitors through collections without visual clutter' },
+              { title: 'Product Collections', desc: 'Organized collections with consistent naming, imagery, and product placement' },
+              { title: 'Trust Badges', desc: 'Shipping, returns, and security trust signals placed at key decision points' },
+              { title: 'Testimonials', desc: 'Customer review section to build social proof and brand credibility' },
+              { title: 'FAQ Section', desc: 'Structured FAQ addressing shipping, returns, and product questions' },
+              { title: 'Brand Consistency', desc: 'Minimalist color palette and typography maintained throughout every page' },
+            ].map((item) => (
+              <div key={item.title} className="bg-slate-50 dark:bg-slate-800 rounded-xl p-5">
+                <h5 className="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">{item.title}</h5>
+                <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Summary */}
+          <div className="bg-gradient-to-br from-stone-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 border border-stone-100 dark:border-slate-700">
+            <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Project Summary</h4>
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+              Art Geometry was built with restraint and intention — every design decision reflects the brand's minimalist philosophy. The result is a storefront that feels premium without excess, guiding visitors smoothly from discovery to checkout.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[{ label: 'Platform', value: 'Shopify' }, { label: 'Scope', value: 'Full Store Build' }, { label: 'Niche', value: 'Minimalist Lifestyle' }].map((s) => (
+                <div key={s.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
+                  <div className="text-base font-bold text-stone-600 dark:text-stone-400 mb-1">{s.value}</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+      {/* ============================================ */}
+      {/* LUMIÈRE BEAUTY CASE STUDY MODAL */}
+      {/* ============================================ */}
+      <Modal
+        isOpen={lumiereBeautyCaseStudyOpen}
+        onClose={() => setLumiereBeautyCaseStudyOpen(false)}
+        size="full"
+      >
+        <div className="space-y-0">
+
+          {/* Hero Header */}
+          <div className="relative bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 rounded-2xl overflow-hidden mb-10 p-8 lg:p-12">
+            <div className="absolute inset-0 opacity-10">
+              <img src="/screenshots/portfolio/LB_08.png" alt="" className="w-full h-full object-cover object-top" />
+            </div>
+            <div className="relative z-10 max-w-3xl">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Case Study</span>
+                <span className="text-slate-400 text-xs">Shopify · Beauty & Skincare</span>
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
+                Lumière Beauty<br />
+                <span className="text-rose-400">Beauty & Skincare Store</span>
+              </h2>
+              <p className="text-slate-300 text-base leading-relaxed mb-6 max-w-2xl">
+                A complete Shopify storefront designed and built for a beauty and skincare brand. The scope covered hero sections, tabbed product collections, editorial lifestyle content, a flash sale experience, and a full category navigation system.
+              </p>
+              <div className="flex flex-wrap gap-6 text-sm">
+                {[{ label: 'Platform', value: 'Shopify' }, { label: 'Niche', value: 'Beauty & Skincare' }, { label: 'Collections', value: '4+' }, { label: 'Page Sections', value: '6+' }].map((s) => (
+                  <div key={s.label}>
+                    <div className="text-slate-400 text-xs mb-0.5">{s.label}</div>
+                    <div className="text-white font-semibold">{s.value}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Section 1 — Hero & Collections Tabs */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-widest mb-2 block">01 · Hero & Featured Collections</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">"Own Every Glow" — A Bold First Impression</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                The homepage opens with a confident full-width hero slider carrying the tagline "Own Every Glow / Your Beauty, Your Rules." Immediately below, a tabbed Featured Collections section lets shoppers jump directly into Skin, Hair, Lip Essentials, or Facial Care Tools with a single click.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Hero Slider', desc: 'Bold headline and CTA rotating across lifestyle imagery to set brand tone instantly' },
+                  { title: 'Tabbed Collections', desc: 'Four tabs (Skin, Hair, Lip Essentials, Facial Care Tools) for frictionless category browsing' },
+                  { title: 'Brand Voice', desc: 'Copy written to feel empowering and aspirational — matching the Lumière Beauty identity' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img src="/screenshots/portfolio/LB_08.png" alt="Lumière Beauty Hero" className="w-full object-cover" />
+            </div>
+          </div>
+
+          {/* Section 2 — Product Collections & Category Nav */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img src="/screenshots/portfolio/LB_04.png" alt="Lumière Beauty Collections" className="w-full object-cover" />
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-widest mb-2 block">02 · Product Collections & Category Navigation</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Every Product, Perfectly Placed</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                Products were organized into four distinct collections — Skincare Serums, Hair Care, Lip Care, and Facial Tools — each with consistent imagery and naming. A dedicated category navigation row was added so shoppers can explore by need or product type without friction.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Four Core Collections', desc: 'Skin, Hair, Lip, and Tools organized into clean, browsable sections with matching visuals' },
+                  { title: 'Category Navigation Row', desc: 'Visual category icons for Lip Care, Facial Tools, Skincare Serums, and Hair Care for fast filtering' },
+                  { title: 'Product Listing Quality', desc: 'Each product placed with accurate titles, imagery, and pricing for a credible storefront' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Section 3 — Category Navigation */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-widest mb-2 block">03 · Visual Category Navigation</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Shop by Category — Fast & Intuitive</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                A visual category strip was built to surface the four main product types — Lip Care, Facial Tools, Skincare Serums, and Hair Care — with icon imagery and clear labels. This reduces time-to-product and helps shoppers with specific needs find what they're looking for in seconds.
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { label: 'Lip Care', icon: '💄' },
+                  { label: 'Facial Tools', icon: '✨' },
+                  { label: 'Skincare Serums', icon: '💧' },
+                  { label: 'Hair Care', icon: '🌿' },
+                ].map((c) => (
+                  <div key={c.label} className="bg-rose-50 dark:bg-slate-800 rounded-xl p-3 flex items-center gap-3">
+                    <span className="text-xl">{c.icon}</span>
+                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{c.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img src="/screenshots/portfolio/LB_05.png" alt="Lumière Beauty Category Navigation" className="w-full object-cover" />
+            </div>
+          </div>
+
+          {/* Section 4 — Made For Glow Editorial */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img src="/screenshots/portfolio/LB_06.png" alt="Lumière Beauty Made For Glow" className="w-full object-cover" />
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-widest mb-2 block">04 · "Made For Glow" Editorial Section</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Lifestyle Content That Sells the Brand</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                A full-width editorial section — "Made For Glow" — was built to blend lifestyle model photography with a product grid. This content-commerce approach reinforces the brand's aspirational identity while keeping products visible and shoppable at all times.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Editorial Layout', desc: 'Side-by-side model photography and product grid create a magazine-quality feel' },
+                  { title: 'Brand Narrative', desc: '"Made For Glow" messaging reinforces the Lumière identity throughout the page' },
+                  { title: 'Shoppable Products', desc: 'Products remain immediately accessible within the editorial experience' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Section 5 — Flash Sale */}
+          <div className="mb-10">
+            <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-widest mb-2 block">05 · Flash Sale Experience</span>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Urgency That Converts</h3>
+            <div className="grid lg:grid-cols-5 gap-6 items-start">
+              <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+                <img src="/screenshots/portfolio/LB_07.png" alt="Lumière Beauty Flash Sale" className="w-full object-cover" />
+              </div>
+              <div className="lg:col-span-2 space-y-4">
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  A dedicated Flash Sale section was built with a bold "70% OFF" banner and a live countdown timer to drive urgency. Discounted products are displayed in a grid beneath the banner — giving shoppers an immediate reason to buy now rather than later.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { label: 'Discount Banner', value: '70% OFF' },
+                    { label: 'Countdown Timer', value: 'Live' },
+                    { label: 'Products Shown', value: 'Grid Layout' },
+                    { label: 'Goal', value: 'Drive Urgency' },
+                  ].map((s) => (
+                    <div key={s.label} className="bg-slate-50 dark:bg-slate-800 rounded-xl p-3 text-center">
+                      <div className="text-base font-bold text-rose-600 dark:text-rose-400">{s.value}</div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Closing Summary */}
+          <div className="bg-gradient-to-br from-rose-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 border border-rose-100 dark:border-slate-700">
+            <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Project Summary</h4>
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+              Lumière Beauty was built as a full-funnel Shopify storefront — from a bold hero that captures attention, through organized collections and category navigation, into editorial lifestyle content and urgency-driven flash sales. Every section was designed to move visitors closer to purchase while reinforcing the brand's premium, glowing identity.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[{ label: 'Platform', value: 'Shopify' }, { label: 'Scope', value: 'Full Store Build' }, { label: 'Deliverable', value: 'Live-Ready Storefront' }].map((s) => (
+                <div key={s.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
+                  <div className="text-base font-bold text-rose-600 dark:text-rose-400 mb-1">{s.value}</div>
                   <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
                 </div>
               ))}
