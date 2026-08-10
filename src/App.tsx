@@ -438,6 +438,59 @@ function useInView(threshold = 0.1) {
 // MAIN APP COMPONENT
 // ============================================
 
+// ============================================
+// SCROLL REVEAL WRAPPER
+// Wrap any section/element in <Reveal> to fade it up
+// into view the first time it scrolls into the viewport.
+// ============================================
+
+function Reveal({
+  children,
+  delay = 0,
+  className = '',
+  fade = false,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  fade?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`${fade ? 'reveal-fade' : 'reveal'} ${isVisible ? 'is-visible' : ''} ${className}`}
+      style={{ animationDelay: isVisible ? `${delay}ms` : undefined }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// ============================================
+// MAIN APP COMPONENT
+// ============================================
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -1114,59 +1167,77 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 via-white to-amber-50/30 dark:from-slate-800/50 dark:via-slate-900 dark:to-slate-800/30" />
-        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gradient-to-br from-emerald-200/30 dark:from-emerald-900/20 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-amber-100/40 dark:from-amber-900/10 to-transparent rounded-full blur-3xl" />
+      <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-slate-950">
+        {/* Aurora Background */}
+        <div className="absolute inset-0">
+          <div className="absolute -top-1/4 -left-1/4 w-[700px] h-[700px] bg-blue-600/25 rounded-full blur-[120px] animate-aurora-1" />
+          <div className="absolute top-1/3 -right-1/4 w-[600px] h-[600px] bg-sky-500/20 rounded-full blur-[120px] animate-aurora-2" />
+          <div className="absolute -bottom-1/4 left-1/3 w-[550px] h-[550px] bg-indigo-600/20 rounded-full blur-[120px] animate-aurora-3" />
+        </div>
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 hero-grid-pattern animate-grid-fade" />
+
+        {/* Vignette to keep text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">Available for Projects</span>
-              </div>
+              <Reveal>
+                <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-400/30 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                  <span className="text-sm font-medium text-blue-300">Available for Projects</span>
+                </div>
+              </Reveal>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-6">
-                E-Commerce Virtual Assistant Helping{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-600">
-                  Online Stores
-                </span>{' '}
-                Grow Efficiently
-              </h1>
+              <Reveal delay={100}>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                  E-Commerce Virtual Assistant Helping{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">
+                    Online Stores
+                  </span>{' '}
+                  Grow Efficiently
+                </h1>
+              </Reveal>
 
-              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
-                Shopify • Amazon • eBay • Poshmark • Crosslisting • Product Research • SEO • Fulfillment
-              </p>
+              <Reveal delay={200}>
+                <p className="text-base sm:text-lg text-slate-300 mb-4 leading-relaxed">
+                  Shopify • Amazon • eBay • Poshmark • Crosslisting • Product Research • SEO • Fulfillment
+                </p>
+              </Reveal>
 
-              <p className="text-lg text-slate-500 dark:text-slate-500 mb-8 max-w-xl mx-auto lg:mx-0">
-                Helping E-Commerce Businesses Scale Through Product Listings, SEO Optimization, Crosslisting, Product Research, and Order Fulfillment.
-              </p>
+              <Reveal delay={300}>
+                <p className="text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0">
+                  Helping E-Commerce Businesses Scale Through Product Listings, SEO Optimization, Crosslisting, Product Research, and Order Fulfillment.
+                </p>
+              </Reveal>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button
-                  onClick={() => setHireMeModalOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold rounded-full hover:bg-slate-800 dark:hover:bg-slate-100 transition-all hover:scale-105 shadow-lg shadow-slate-900/20"
-                >
-                  <Mail className="w-5 h-5" />
-                  Hire Me
-                </button>
-                <a
-                  href="#portfolio"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-semibold rounded-full hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  View Portfolio
-                </a>
-              </div>
+              <Reveal delay={400}>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <button
+                    onClick={() => setHireMeModalOpen(true)}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-500 text-white font-semibold rounded-full hover:bg-blue-400 transition-all hover:scale-105 shadow-lg shadow-blue-500/30"
+                  >
+                    <Mail className="w-5 h-5" />
+                    Hire Me
+                  </button>
+                  <a
+                    href="#portfolio"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border-2 border-white/15 text-white font-semibold rounded-full hover:border-blue-400 hover:text-blue-300 transition-all backdrop-blur-sm"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    View Portfolio
+                  </a>
+                </div>
+              </Reveal>
             </div>
 
             {/* 3D E-Commerce Ecosystem Visual */}
-            <div className="hidden lg:flex relative items-center justify-center">
+            <Reveal delay={250} className="hidden lg:flex relative items-center justify-center">
               <div className="relative w-full max-w-lg mx-auto">
                 {/* Main Dashboard Card */}
-                <div className="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl shadow-slate-900/15 border border-slate-200 dark:border-slate-700 p-5 rotate-1 hover:rotate-0 transition-transform duration-500">
+                <div className="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl shadow-blue-950/40 border border-slate-200 dark:border-slate-700 p-5 rotate-1 hover:rotate-0 transition-transform duration-500">
                   {/* Browser chrome */}
                   <div className="flex items-center gap-1.5 mb-4">
                     <div className="w-3 h-3 rounded-full bg-red-400" />
@@ -1316,14 +1387,14 @@ function App() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-slate-300 dark:border-slate-600 rounded-full flex items-start justify-center p-2">
-            <div className="w-1.5 h-3 bg-slate-400 dark:bg-slate-500 rounded-full animate-scroll" />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
+          <div className="w-6 h-10 border-2 border-blue-400/50 rounded-full flex items-start justify-center p-2">
+            <div className="w-1.5 h-3 bg-blue-400 rounded-full animate-scroll" />
           </div>
         </div>
       </section>
