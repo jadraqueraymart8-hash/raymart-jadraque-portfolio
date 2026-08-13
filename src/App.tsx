@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import LampIntro from './LampIntro';
+import { cn } from './lib/utils';
 import {
   Mail,
   Phone,
@@ -191,29 +193,26 @@ const PoshmarkLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   </svg>
 );
 
-// Zik Analytics — official teal-gradient background with white eye + spiral
+// Zik Analytics — 3-bar gradient mark
 const ZikAnalyticsLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="zikGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient id="zikGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#3ECFB2"/>
-        <stop offset="50%" stopColor="#1A9E8E"/>
-        <stop offset="100%" stopColor="#0A5A52"/>
+        <stop offset="100%" stopColor="#8B5CF6"/>
+      </linearGradient>
+      <linearGradient id="zikGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#2FB8C4"/>
+        <stop offset="100%" stopColor="#7C5CE0"/>
+      </linearGradient>
+      <linearGradient id="zikGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#22A0D6"/>
+        <stop offset="100%" stopColor="#6B4CE0"/>
       </linearGradient>
     </defs>
-    <rect width="200" height="200" rx="36" fill="url(#zikGrad)"/>
-    {/* Eye outer shape — wide ellipse */}
-    <ellipse cx="100" cy="100" rx="82" ry="52" fill="white"/>
-    {/* Eye inner iris — teal circle */}
-    <circle cx="100" cy="100" r="36" fill="#1A9E8E"/>
-    {/* Spiral/swirl inside iris */}
-    <path
-      d="M100 72 C120 72 136 86 136 100 C136 114 120 128 100 128 C82 128 68 116 68 102 C68 90 78 82 90 82 C100 82 108 90 108 100 C108 108 102 114 94 112"
-      stroke="white" strokeWidth="9" strokeLinecap="round" fill="none"
-    />
-    {/* Eye corner points */}
-    <path d="M18 100 Q50 48 100 48 Q150 48 182 100" stroke="white" strokeWidth="4" strokeLinecap="round" fill="none"/>
-    <path d="M18 100 Q50 152 100 152 Q150 152 182 100" stroke="white" strokeWidth="4" strokeLinecap="round" fill="none"/>
+    <rect x="30" y="24" width="26" height="152" rx="13" fill="url(#zikGrad1)"/>
+    <rect x="87" y="24" width="26" height="152" rx="13" fill="url(#zikGrad2)" transform="rotate(12 100 100)"/>
+    <rect x="144" y="24" width="26" height="152" rx="13" fill="url(#zikGrad3)" transform="rotate(24 157 100)"/>
   </svg>
 );
 
@@ -234,15 +233,11 @@ const VendooLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   </svg>
 );
 
-// Easync — blue cloud-sync icon
+// Easync — simplified circular "S" monogram mark
 const EasyncLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="48" height="48" rx="10" fill="#0EA5E9"/>
-    <path d="M33 22a9 9 0 00-18 0 6 6 0 000 12h18a6 6 0 000-12z" fill="white" opacity="0.9"/>
-    <path d="M20 29l-3-3 3-3" stroke="#0EA5E9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M17 26h5" stroke="#0EA5E9" strokeWidth="2.5" strokeLinecap="round"/>
-    <path d="M28 26l3 3-3 3" stroke="#0EA5E9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M31 29h-5" stroke="#0EA5E9" strokeWidth="2.5" strokeLinecap="round"/>
+    <circle cx="24" cy="24" r="23" fill="#F5F5F0" stroke="#1A1A1A" strokeWidth="1.5"/>
+    <text x="24" y="33" textAnchor="middle" fontSize="26" fontWeight="700" fontFamily="Georgia,'Times New Roman',serif" fill="#1A1A1A">S</text>
   </svg>
 );
 
@@ -325,25 +320,13 @@ const QuickBooksLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
 // MODAL COMPONENT
 // ============================================
 
+// ============================================
+// MODAL COMPONENT (shadcn-style, built on Radix Dialog)
+// Same external API as before (isOpen/onClose/title/children/size)
+// so every existing call site keeps working unchanged.
+// ============================================
+
 function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalProps) {
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = '';
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
   const sizeClasses = {
     sm: 'max-w-sm',
     md: 'max-w-md',
@@ -353,26 +336,49 @@ function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div
-        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      <div
-        className={`relative w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl animate-modal-enter`}
-      >
-        <div className="sticky top-0 bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between z-10">
-          {title && <h3 className="text-xl font-semibold text-slate-900">{title}</h3>}
-          <button
-            onClick={onClose}
-            className="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors"
-          >
-            <X className="w-5 h-5 text-slate-500" />
-          </button>
-        </div>
-        <div className="p-6">{children}</div>
-      </div>
-    </div>
+    <DialogPrimitive.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay
+          className={cn(
+            'fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm',
+            'data-[state=open]:animate-in data-[state=closed]:animate-out',
+            'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0'
+          )}
+        />
+        <DialogPrimitive.Content
+          onOpenAutoFocus={(e) => e.preventDefault()}
+          className={cn(
+            'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2',
+            'w-[calc(100%-2rem)]',
+            sizeClasses[size],
+            'max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-800 rounded-2xl shadow-2xl',
+            'data-[state=open]:animate-in data-[state=closed]:animate-out',
+            'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+            'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+            'duration-200'
+          )}
+        >
+          <div className="sticky top-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border-b border-slate-100 dark:border-slate-700 px-6 py-4 flex items-center justify-between z-10">
+            {title ? (
+              <DialogPrimitive.Title className="text-xl font-semibold text-slate-900 dark:text-white">
+                {title}
+              </DialogPrimitive.Title>
+            ) : (
+              <DialogPrimitive.Title className="sr-only">Details</DialogPrimitive.Title>
+            )}
+            <DialogPrimitive.Close asChild>
+              <button
+                aria-label="Close"
+                className="w-10 h-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center transition-colors"
+              >
+                <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+              </button>
+            </DialogPrimitive.Close>
+          </div>
+          <div className="p-6">{children}</div>
+        </DialogPrimitive.Content>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
   );
 }
 
@@ -505,7 +511,6 @@ function App() {
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
   const [shopifyCaseStudyOpen, setShopifyCaseStudyOpen] = useState(false);
   const [geoEssentialsCaseStudyOpen, setGeoEssentialsCaseStudyOpen] = useState(false);
-  const [artGeometryCaseStudyOpen, setArtGeometryCaseStudyOpen] = useState(false);
   const [lumiereBeautyCaseStudyOpen, setLumiereBeautyCaseStudyOpen] = useState(false);
   const [serviceModalOpen, setServiceModalOpen] = useState<string | null>(null);
   const [portfolioModalOpen, setPortfolioModalOpen] = useState<string | null>(null);
@@ -742,21 +747,77 @@ function App() {
     },
   ];
 
-  const skills = [
-    { name: 'Shopify Product Listing', icon: ShoppingBag, description: 'Complete product listing creation on Shopify including variants, collections, and SEO optimization', tools: ['Shopify Admin', 'Shopify Flow', 'Metafields'], tasks: ['Product creation', 'Variant setup', 'Collection management', 'Theme customization'] },
-    { name: 'Amazon Product Listing', icon: Layers, description: 'Amazon Seller Central product listings with A+ content and backend keywords optimization', tools: ['Amazon Seller Central', 'Helium 10', 'Jungle Scout'], tasks: ['Product creation', 'A+ Content', 'Keyword optimization', 'Category management'] },
-    { name: 'eBay Product Listing', icon: ShoppingBag, description: 'eBay listing creation with SEO-optimized titles and eBay-specific best practices', tools: ['eBay Seller Hub', 'Terapeak', 'eBay Tools'], tasks: ['Listing creation', 'Template design', 'Category research', 'Promoted listings'] },
-    { name: 'Poshmark Listing', icon: ShoppingBag, description: 'Fashion-focused Poshmark listings with platform-specific optimization', tools: ['Poshmark Seller Dashboard', 'Poshmark Tools'], tasks: ['Product posting', 'Sharing strategies', 'Inventory management', 'Pricing optimization'] },
-    { name: 'Product Research', icon: Search, description: 'Data-driven product research to identify profitable opportunities with competition analysis', tools: ['Zik Analytics', 'Helium 10', 'Jungle Scout', 'Google Trends'], tasks: ['Market analysis', 'Competitor research', 'Profit calculation', 'Trend identification'] },
-    { name: 'SEO Optimization', icon: TrendingUp, description: 'Strategic keyword research and implementation for improved search rankings', tools: ['Google Keyword Planner', 'Ahrefs', 'SEMrush', 'Platform Tools'], tasks: ['Keyword research', 'On-page optimization', 'Title optimization', 'Backend keywords'] },
-    { name: 'Product Description Writing', icon: PenTool, description: 'Compelling, conversion-focused product descriptions optimized for SEO', tools: ['Grammarly', 'Hemingway Editor', 'Canva'], tasks: ['Description writing', 'Feature highlighting', 'Benefit mapping', 'Copy editing'] },
-    { name: 'Crosslisting Expert', icon: RefreshCw, description: 'Efficient crosslisting across multiple platforms with inventory synchronization', tools: ['Vendoo', 'Easync', 'List Perfectly'], tasks: ['Multi-platform listing', 'Inventory sync', 'Template management', 'Error monitoring'] },
-    { name: 'Order Fulfillment', icon: Package, description: 'End-to-end order processing and fulfillment coordination', tools: ['Shipping Platforms', 'Platform OM', 'Label Generators'], tasks: ['Order processing', 'Label creation', 'Tracking updates', 'Issue resolution'] },
-    { name: 'Inventory Management', icon: Database, description: 'Real-time inventory tracking and management across platforms', tools: ['Google Sheets', 'Excel', 'Inventory Software'], tasks: ['Stock tracking', 'Reorder alerts', 'Sync management', 'Reporting'] },
-    { name: 'Data Entry', icon: FileSpreadsheet, description: 'Accurate data entry and management for product information', tools: ['Excel', 'Google Sheets', 'Platform Tools'], tasks: ['Data input', 'Data cleaning', 'Migration', 'Validation'] },
-    { name: 'Google Sheets', icon: FileSpreadsheet, description: 'Advanced spreadsheet management with formulas and automation', tools: ['Google Sheets', 'Apps Script'], tasks: ['Template creation', 'Formula automation', 'Data analysis', 'Dashboard building'] },
-    { name: 'Microsoft Excel', icon: FileSpreadsheet, description: 'Professional Excel usage for data management and reporting', tools: ['Microsoft Excel', 'Pivot Tables', 'Charts'], tasks: ['Data organization', 'Reporting', 'Analysis', 'Automation'] },
-    { name: 'Customer Support', icon: Users, description: 'Professional customer service across all channels', tools: ['Help Desk Software', 'Chat Tools', 'Email'], tasks: ['Inquiry handling', 'Issue resolution', 'Follow-up', 'Feedback management'] },
+  const coreSkills = [
+    {
+      name: 'Product Listing',
+      icon: ShoppingBag,
+      description: 'Listing a product starts with sourcing and validating it through sales data, reviews, and pricing research. From there, I rewrite the title and description for SEO and brand voice, set accurate pricing with the right markup, organize variants and stock, and place it in the correct collection. I also clean up product images to match the store\'s aesthetic and fill in SEO fields before publishing — always reviewing everything in Draft before it goes live.',
+      toolsUsed: [
+        { name: 'Shopify Admin', blurb: 'Product creation, variants, collections, and SEO fields' },
+        { name: 'Zik Analytics', blurb: 'Sourcing and validating products with sales data' },
+      ],
+      tasks: ['Product sourcing & validation', 'SEO-optimized titles & descriptions', 'Pricing & markup', 'Variant & stock setup', 'Image cleanup', 'Draft review before publishing'],
+    },
+    {
+      name: 'Order Fulfillment',
+      icon: Package,
+      description: 'Order fulfillment means the order isn\'t done until the customer actually has it in hand. I confirm supplier stock, place and track the order, monitor for delays or price changes, and update tracking so the buyer is never left guessing. If something goes wrong — a cancelled item, a price jump, a shipping delay — I catch it early and resolve it before it becomes a complaint.',
+      toolsUsed: [
+        { name: 'Easync', blurb: 'Automated order placement and tracking sync' },
+        { name: 'Platform Order Managers', blurb: 'Monitoring status across every sales channel' },
+      ],
+      tasks: ['Order placement & tracking', 'Supplier stock monitoring', 'Delay & price-change alerts', 'Tracking updates to buyers', 'Cancellation handling'],
+    },
+    {
+      name: 'Customer Support',
+      icon: Users,
+      description: 'Most customer messages are really the same handful of concerns — where\'s my order, can I get a refund, is this the right size. I answer quickly, stay polite even when the customer isn\'t, and actually solve the problem instead of just apologizing for it. For escalations, I coordinate between the customer, the platform, and the supplier until it\'s fully resolved, not just closed.',
+      toolsUsed: [
+        { name: 'Platform Messaging', blurb: 'Shopify, eBay, and Amazon buyer-seller messaging' },
+        { name: 'Gmail', blurb: 'Order-related email threads and confirmations' },
+      ],
+      tasks: ['Order status inquiries', 'Refunds & replacements', 'Escalation coordination', 'Tone-appropriate responses', 'Follow-up until resolved'],
+    },
+    {
+      name: 'Product Research',
+      icon: Search,
+      description: 'Before I list anything, I check whether it\'s actually worth listing. That means pulling sales history, checking competition and pricing, reading reviews for red flags, and running the numbers on margin after fees and shipping. A product only gets added once it passes that checklist — not just because it looks good.',
+      toolsUsed: [
+        { name: 'Zik Analytics', blurb: 'Sales history, competition, and profit calculation' },
+        { name: 'Google Trends', blurb: 'Demand and seasonality checks' },
+      ],
+      tasks: ['Sales & demand data', 'Competition & pricing checks', 'Review red-flag screening', 'Margin calculation', 'Go/no-go decision'],
+    },
+    {
+      name: 'Inventory Management',
+      icon: Database,
+      description: 'Overselling is one of the fastest ways to lose a customer\'s trust, so I keep stock numbers accurate across every platform in real time. I build tracking sheets that flag low stock before it becomes a stockout, sync quantities after every sale, and reconcile counts regularly so what\'s listed always matches what\'s actually available.',
+      toolsUsed: [
+        { name: 'Google Sheets', blurb: 'Automated tracking sheets with low-stock alerts' },
+        { name: 'Easync', blurb: 'Multi-channel stock sync' },
+      ],
+      tasks: ['Real-time stock tracking', 'Low-stock alerts', 'Cross-platform sync', 'Stock reconciliation', 'Reporting'],
+    },
+    {
+      name: 'Email Management',
+      icon: Mail,
+      description: 'I keep the inbox at zero unresolved — sorting order confirmations, supplier updates, and customer questions so nothing sits unanswered. Routine messages get handled directly; anything time-sensitive (a delay, a cancelled order, a complaint) gets flagged and actioned the same day, not left to pile up.',
+      toolsUsed: [
+        { name: 'Gmail', blurb: 'Inbox triage, labels, and filters' },
+        { name: 'Google Sheets', blurb: 'Logging recurring issues and order references' },
+      ],
+      tasks: ['Inbox triage & sorting', 'Order confirmation handling', 'Supplier correspondence', 'Same-day flagging of urgent issues', 'Response tracking'],
+    },
+  ];
+
+  const generalSkills = [
+    { name: 'SEO Optimization', icon: TrendingUp, description: 'Keyword research and on-page optimization — titles, descriptions, and backend tags — written to rank higher and still read naturally to a real buyer.' },
+    { name: 'Description Writing', icon: PenTool, description: 'Product descriptions written in paragraph form, benefit-focused and SEO-aware, matching each brand\'s voice instead of sounding templated.' },
+    { name: 'Data Entry', icon: FileSpreadsheet, description: 'Fast, accurate entry and cleanup of product and order data, with a strong eye for catching mismatched or missing fields before they cause problems.' },
+    { name: 'Google Sheets', icon: FileSpreadsheet, description: 'Building tracking sheets, formulas, and simple dashboards for inventory, orders, and reporting — kept simple enough that anyone on the team can read them.' },
+    { name: 'Microsoft Excel', icon: FileSpreadsheet, description: 'Comfortable in Excel for reporting and analysis — pivot tables, formulas, and formatting for data that needs to travel outside Sheets.' },
+    { name: 'Data Analysis', icon: BarChart3, description: 'Turning raw sales and listing data into a clear read on what\'s working — which products, platforms, or price points are actually performing.' },
+    { name: 'Content Editing', icon: FileText, description: 'A close, consistent editing pass on listings and customer messages — catching tone, typos, and formatting issues before anything goes live.' },
   ];
 
   const toolsData = [
@@ -765,9 +826,7 @@ function App() {
     ), experience: 'Expert', description: 'Complete store management from product listing to order fulfillment', tasks: ['Product management', 'Order processing', 'Analytics', 'Theme editing'] },
     { name: 'Amazon Seller Central', Logo: AmazonLogo, experience: 'Expert', description: 'Full Amazon marketplace management including FBA and FBM', tasks: ['Listing creation', 'Inventory management', 'Advertising', 'Reports'] },
     { name: 'eBay Seller Hub', Logo: EBayLogo, experience: 'Expert', description: 'Complete eBay selling operations including international shipping', tasks: ['Listing management', 'Order processing', 'Promoted listings', 'Analytics'] },
-    { name: 'Poshmark', Logo: PoshmarkLogo, experience: 'Expert', description: 'Fashion marketplace expertise with sharing strategies', tasks: ['Product posting', 'Social sharing', 'Inventory sync', 'Pricing'] },
     { name: 'Zik Analytics', Logo: ZikAnalyticsLogo, experience: 'Advanced', description: 'eBay product research and market analysis', tasks: ['Product research', 'Competitor analysis', 'Profit calculation', 'Trend spotting'] },
-    { name: 'Vendoo', Logo: VendooLogo, experience: 'Expert', description: 'Multi-platform crosslisting and inventory management', tasks: ['Crosslisting', 'Inventory sync', 'Bulk editing', 'Order routing'] },
     { name: 'Easync', Logo: EasyncLogo, experience: 'Intermediate', description: 'Dropshipping automation and fulfillment', tasks: ['Product sourcing', 'Order automation', 'Price monitoring', 'Inventory sync'] },
     { name: 'Google Workspace', Logo: GoogleWorkspaceLogo, experience: 'Expert', description: 'Complete Google productivity suite — Gmail, Drive, Docs, Sheets, Calendar', tasks: ['Sheets', 'Docs', 'Drive', 'Calendar', 'Gmail'] },
     { name: 'Google Sheets', Logo: GoogleSheetsLogo, experience: 'Expert', description: 'Advanced spreadsheet management for inventory tracking and reporting', tasks: ['Inventory tracking', 'Formulas & automation', 'Dashboards', 'Reporting'] },
@@ -1168,22 +1227,20 @@ function App() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-slate-950">
-        {/* Aurora Background */}
+        {/* Aurora Background — subtle, kept behind everything */}
         <div className="absolute inset-0">
-          <div className="absolute -top-1/4 -left-1/4 w-[700px] h-[700px] bg-blue-600/25 rounded-full blur-[120px] animate-aurora-1" />
-          <div className="absolute top-1/3 -right-1/4 w-[600px] h-[600px] bg-sky-500/20 rounded-full blur-[120px] animate-aurora-2" />
-          <div className="absolute -bottom-1/4 left-1/3 w-[550px] h-[550px] bg-indigo-600/20 rounded-full blur-[120px] animate-aurora-3" />
+          <div className="absolute -top-1/4 -left-1/4 w-[700px] h-[700px] bg-blue-600/15 rounded-full blur-[120px] animate-aurora-1" />
+          <div className="absolute top-1/3 -right-1/4 w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[120px] animate-aurora-2" />
+          <div className="absolute -bottom-1/4 left-1/3 w-[550px] h-[550px] bg-indigo-600/10 rounded-full blur-[120px] animate-aurora-3" />
         </div>
 
         {/* Grid pattern overlay */}
         <div className="absolute inset-0 hero-grid-pattern animate-grid-fade" />
 
-        {/* Vignette to keep text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
+            {/* LEFT — Intro */}
+            <div className="text-center lg:text-left order-2 lg:order-1">
               <Reveal>
                 <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-400/30 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm">
                   <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
@@ -1192,29 +1249,29 @@ function App() {
               </Reveal>
 
               <Reveal delay={100}>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                  E-Commerce Virtual Assistant Helping{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">
-                    Online Stores
-                  </span>{' '}
-                  Grow Efficiently
+                <p className="font-display text-blue-400 text-lg font-medium mb-2 tracking-wide">Hi, I'm</p>
+              </Reveal>
+
+              <Reveal delay={150}>
+                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] mb-4 tracking-tight">
+                  Raymart Jadraque
                 </h1>
               </Reveal>
 
-              <Reveal delay={200}>
-                <p className="text-base sm:text-lg text-slate-300 mb-4 leading-relaxed">
-                  Shopify • Amazon • eBay • Poshmark • Crosslisting • Product Research • SEO • Fulfillment
-                </p>
+              <Reveal delay={220}>
+                <h2 className="text-xl sm:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300 font-semibold mb-6">
+                  E-Commerce Virtual Assistant
+                </h2>
               </Reveal>
 
               <Reveal delay={300}>
-                <p className="text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0">
-                  Helping E-Commerce Businesses Scale Through Product Listings, SEO Optimization, Crosslisting, Product Research, and Order Fulfillment.
+                <p className="text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  Helping online stores scale through product listings, SEO optimization, crosslisting, product research, and order fulfillment — across Shopify, Amazon, eBay, and Poshmark.
                 </p>
               </Reveal>
 
-              <Reveal delay={400}>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Reveal delay={380}>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
                   <button
                     onClick={() => setHireMeModalOpen(true)}
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-500 text-white font-semibold rounded-full hover:bg-blue-400 transition-all hover:scale-105 shadow-lg shadow-blue-500/30"
@@ -1231,159 +1288,75 @@ function App() {
                   </a>
                 </div>
               </Reveal>
+
+              {/* Toolkit strip */}
+              <Reveal delay={460}>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Platforms I Work In</p>
+                  <div className="flex items-center gap-3 justify-center lg:justify-start flex-wrap">
+                    {[
+                      { src: '/logos/shopify/image.png', alt: 'Shopify', bg: 'bg-white' },
+                      { src: '/logos/amazon/image.png', alt: 'Amazon', bg: 'bg-black' },
+                      { src: '/logos/ebay/image.png', alt: 'eBay', bg: 'bg-white' },
+                    ].map((p) => (
+                      <div key={p.alt} className={`w-11 h-11 ${p.bg} rounded-xl shadow-md flex items-center justify-center p-2 border border-white/10`}>
+                        <img src={p.src} alt={p.alt} className="w-full h-full object-contain" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
             </div>
 
-            {/* 3D E-Commerce Ecosystem Visual */}
-            <Reveal delay={250} className="hidden lg:flex relative items-center justify-center">
-              <div className="relative w-full max-w-lg mx-auto">
-                {/* Main Dashboard Card */}
-                <div className="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl shadow-blue-950/40 border border-slate-200 dark:border-slate-700 p-5 rotate-1 hover:rotate-0 transition-transform duration-500">
-                  {/* Browser chrome */}
-                  <div className="flex items-center gap-1.5 mb-4">
-                    <div className="w-3 h-3 rounded-full bg-red-400" />
-                    <div className="w-3 h-3 rounded-full bg-amber-400" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                    <div className="flex-1 ml-3 h-5 bg-slate-100 dark:bg-slate-700 rounded-md flex items-center px-2">
-                      <span className="text-[10px] text-slate-400">crosslisting workflow</span>
-                    </div>
-                  </div>
+            {/* RIGHT — Photo with platform-sync signature */}
+            <Reveal delay={200} className="order-1 lg:order-2 relative flex items-center justify-center">
+              <div className="relative w-full max-w-sm mx-auto">
+                {/* Glow behind photo */}
+                <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full scale-90" />
 
-                  {/* Revenue row */}
-                  <div className="grid grid-cols-2 gap-2 mb-3">
-                    <div className="bg-[#96BF48]/10 border border-[#96BF48]/30 rounded-xl p-3 flex items-center gap-2">
-                      <img src="/logos/shopify/image.png" alt="Shopify" className="w-8 h-8 object-contain" />
-                      <div>
-                        <div className="text-xs text-slate-500 dark:text-slate-400">Shopify</div>
-                        <div className="text-sm font-bold text-slate-900 dark:text-white">$24,580</div>
-                      </div>
-                    </div>
-                    <div className="bg-[#FF9900]/10 border border-[#FF9900]/30 rounded-xl p-3 flex items-center gap-2">
-                      <img src="/logos/amazon/image.png" alt="Amazon" className="w-8 h-8 object-contain" />
-                      <div>
-                        <div className="text-xs text-slate-500 dark:text-slate-400">Amazon</div>
-                        <div className="text-sm font-bold text-slate-900 dark:text-white">$31,240</div>
-                      </div>
-                    </div>
-                  </div>
+                {/* Photo, blended into background */}
+                <div className="relative">
+                  <img
+                    src="/images/raymart-hero.png"
+                    alt="Raymart Jadraque"
+                    className="relative z-10 w-full h-auto object-contain drop-shadow-2xl"
+                  />
+                  {/* Blend mask — fades photo edges into the dark bg */}
+                  <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-slate-950" style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 40%, transparent 55%, rgba(2,6,23,0.9) 100%)' }} />
+                </div>
 
-                  {/* Crosslisting workflow with real logos */}
-                  <div className="bg-slate-50 dark:bg-slate-700/50 rounded-xl p-3 mb-3">
-                    <div className="flex items-center gap-1 mb-2">
-                      <RefreshCw className="w-3 h-3 text-emerald-500" />
-                      <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wide">Live Crosslisting</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      {/* Shopify */}
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-10 h-10 bg-white dark:bg-slate-600 rounded-xl shadow-sm flex items-center justify-center p-1">
-                          <img src="/logos/shopify/image.png" alt="Shopify" className="w-7 h-7 object-contain" />
-                        </div>
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400 font-medium">Shopify</span>
-                      </div>
-                      {/* Arrow */}
-                      <div className="flex-1 flex items-center justify-center">
-                        <div className="w-full h-px bg-gradient-to-r from-emerald-300 to-amber-300 relative">
-                          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                        </div>
-                      </div>
-                      {/* Amazon */}
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-10 h-10 bg-black rounded-xl shadow-sm flex items-center justify-center p-1">
-                          <img src="/logos/amazon/image.png" alt="Amazon" className="w-8 h-8 object-contain" />
-                        </div>
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400 font-medium">Amazon</span>
-                      </div>
-                      {/* Arrow */}
-                      <div className="flex-1 flex items-center justify-center">
-                        <div className="w-full h-px bg-gradient-to-r from-amber-300 to-blue-300 relative">
-                          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-amber-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }} />
-                        </div>
-                      </div>
-                      {/* eBay */}
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-10 h-10 bg-white dark:bg-slate-600 rounded-xl shadow-sm flex items-center justify-center p-1">
-                          <img src="/logos/ebay/image.png" alt="eBay" className="w-8 h-6 object-contain" />
-                        </div>
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400 font-medium">eBay</span>
-                      </div>
-                      {/* Arrow */}
-                      <div className="flex-1 flex items-center justify-center">
-                        <div className="w-full h-px bg-gradient-to-r from-blue-300 to-pink-300 relative">
-                          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }} />
-                        </div>
-                      </div>
-                      {/* Poshmark */}
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-10 h-10 bg-white dark:bg-slate-600 rounded-xl shadow-sm flex items-center justify-center p-1">
-                          <img src="/logos/poshmark/image.png" alt="Poshmark" className="w-7 h-7 object-contain" />
-                        </div>
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400 font-medium">Poshmark</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Stats row */}
-                  <div className="grid grid-cols-4 gap-2">
-                    <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-lg p-2 text-center">
-                      <div className="text-sm font-bold text-emerald-700 dark:text-emerald-400">1,024</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Listed</div>
-                    </div>
-                    <div className="bg-amber-50 dark:bg-amber-900/30 rounded-lg p-2 text-center">
-                      <div className="text-sm font-bold text-amber-700 dark:text-amber-400">512</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Orders</div>
-                    </div>
-                    <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-2 text-center">
-                      <div className="text-sm font-bold text-blue-700 dark:text-blue-400">4</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Platforms</div>
-                    </div>
-                    <div className="bg-slate-100 dark:bg-slate-700 rounded-lg p-2 text-center">
-                      <div className="text-sm font-bold text-slate-900 dark:text-white">+40%</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">SEO</div>
+                {/* Floating: Live Sync indicator */}
+                <div className="absolute top-4 -right-2 sm:-right-8 bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-3 border border-blue-500/20 z-30 animate-float">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                    </span>
+                    <div>
+                      <p className="text-[10px] text-slate-400">Status</p>
+                      <p className="text-xs font-bold text-white">All Synced</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Floating: Shopify growth */}
-                <div className="absolute -top-5 -right-6 bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-3 border border-slate-200 dark:border-slate-700 animate-float">
-                  <div className="flex items-center gap-2">
-                    <img src="/logos/shopify/image.png" alt="Shopify" className="w-8 h-8 object-contain" />
-                    <div>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Growth</p>
-                      <p className="text-sm font-bold text-emerald-600">+35%</p>
-                    </div>
+                {/* Floating: Shopify */}
+                <div className="absolute top-1/4 -left-4 sm:-left-10 bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-2.5 border border-white/10 z-30 animate-float-alt">
+                  <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center p-1.5">
+                    <img src="/logos/shopify/image.png" alt="Shopify" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
-                {/* Floating: Amazon orders */}
-                <div className="absolute -bottom-4 -left-6 bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-3 border border-slate-200 dark:border-slate-700 animate-float-delayed">
-                  <div className="flex items-center gap-2">
-                    <img src="/logos/amazon/image.png" alt="Amazon" className="w-8 h-8 object-contain bg-black rounded-lg p-0.5" />
-                    <div>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Products</p>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">1,000+</p>
-                    </div>
+                {/* Floating: Amazon */}
+                <div className="absolute bottom-1/3 -right-4 sm:-right-10 bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-2.5 border border-white/10 z-30 animate-float-delayed">
+                  <div className="w-9 h-9 bg-black rounded-lg flex items-center justify-center p-1.5">
+                    <img src="/logos/amazon/image.png" alt="Amazon" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
                 {/* Floating: eBay */}
-                <div className="absolute top-1/3 -left-10 bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-3 border border-slate-200 dark:border-slate-700 animate-float-alt">
-                  <div className="flex items-center gap-2">
-                    <img src="/logos/ebay/image.png" alt="eBay" className="w-10 h-7 object-contain" />
-                    <div>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Listings</p>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">250+</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating: Poshmark */}
-                <div className="absolute bottom-1/4 -right-6 bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-3 border border-slate-200 dark:border-slate-700 animate-float-slow">
-                  <div className="flex items-center gap-2">
-                    <img src="/logos/poshmark/image.png" alt="Poshmark" className="w-8 h-8 object-contain" />
-                    <div>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Fulfilled</p>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">500+</p>
-                    </div>
+                <div className="absolute bottom-6 left-2 sm:-left-6 bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-2.5 border border-white/10 z-30 animate-float-slow">
+                  <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center p-1.5">
+                    <img src="/logos/ebay/image.png" alt="eBay" className="w-full h-full object-contain" />
                   </div>
                 </div>
               </div>
@@ -1535,30 +1508,54 @@ function App() {
       {/* Skills Section */}
       <section id="skills" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
-              <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">My Expertise</span>
+          <Reveal className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/50 border border-blue-200 dark:border-blue-700/50 rounded-full px-4 py-1.5 mb-6">
+              <span className="text-sm font-medium text-blue-700 dark:text-blue-400">My Expertise</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
               Skills & Capabilities
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Comprehensive e-commerce expertise across multiple platforms
+              Comprehensive e-commerce expertise across multiple platforms — tap any skill to see how I approach it
             </p>
+          </Reveal>
+
+          {/* Core Skills */}
+          <Reveal delay={100} className="mb-4">
+            <span className="inline-block bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">Core Skills</span>
+          </Reveal>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-6 mb-12">
+            {coreSkills.map((skill, index) => (
+              <Reveal key={skill.name} delay={index * 60}>
+                <button
+                  onClick={() => setSkillModalOpen(skill.name)}
+                  className="card-glow group w-full bg-white dark:bg-slate-700 hover:bg-blue-50 dark:hover:bg-slate-600 rounded-2xl p-5 lg:p-6 transition-all text-left hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10"
+                >
+                  <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/50 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/70 border border-blue-200 dark:border-blue-800 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                    <skill.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <h4 className="font-semibold text-slate-900 dark:text-white mb-1">{skill.name}</h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">{skill.description}</p>
+                </button>
+              </Reveal>
+            ))}
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {skills.map((skill, index) => (
-              <button
-                key={index}
-                onClick={() => setSkillModalOpen(skill.name)}
-                className="card-glow group bg-white dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-600 rounded-2xl p-5 lg:p-6 transition-all text-left"
-              >
-                <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/50 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/70 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                  <skill.icon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-                </div>
-                <h4 className="font-medium text-slate-900 dark:text-white">{skill.name}</h4>
-              </button>
+          {/* General Skills */}
+          <Reveal delay={100} className="mb-4">
+            <span className="inline-block bg-white dark:bg-slate-700 border border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-400 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">General Skills</span>
+          </Reveal>
+          <div className="flex flex-wrap gap-3">
+            {generalSkills.map((skill, index) => (
+              <Reveal key={skill.name} delay={index * 40}>
+                <button
+                  onClick={() => setSkillModalOpen(skill.name)}
+                  className="group inline-flex items-center gap-2 bg-white dark:bg-slate-700 hover:bg-blue-600 dark:hover:bg-blue-600 border border-slate-200 dark:border-slate-600 hover:border-blue-600 rounded-full pl-3 pr-4 py-2 transition-all hover:-translate-y-0.5"
+                >
+                  <skill.icon className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-white transition-colors">{skill.name}</span>
+                </button>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -1567,9 +1564,9 @@ function App() {
       {/* Tools & Platforms Section */}
       <section className="py-20 lg:py-32 bg-gradient-to-b from-slate-900 to-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-emerald-900/50 border border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
-              <span className="text-sm font-medium text-emerald-400">Tech Stack</span>
+          <Reveal className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-blue-900/50 border border-blue-700/50 rounded-full px-4 py-1.5 mb-6">
+              <span className="text-sm font-medium text-blue-400">Tech Stack</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Tools & Platforms
@@ -1577,25 +1574,26 @@ function App() {
             <p className="text-lg text-slate-400 max-w-2xl mx-auto">
               Proficient in industry-leading e-commerce tools
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {toolsData.map((tool, index) => (
-              <button
-                key={index}
-                onClick={() => setToolModalOpen(tool.name)}
-                className="card-glow bg-slate-800/50 backdrop-blur-sm rounded-2xl p-5 text-center hover:bg-slate-700/50 transition-all group"
-              >
-                <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-4 overflow-hidden bg-slate-900/40 group-hover:bg-slate-700/60 transition-all">
-                  <tool.Logo className="w-12 h-12" />
-                </div>
-                <h4 className="font-medium text-white text-sm mb-1">{tool.name}</h4>
-                {tool.experience === 'In Progress' ? (
-                  <span className="text-xs text-amber-400">In Progress</span>
-                ) : (
-                  <span className="text-xs text-emerald-400">{tool.experience}</span>
-                )}
-              </button>
+              <Reveal key={tool.name} delay={index * 50}>
+                <button
+                  onClick={() => setToolModalOpen(tool.name)}
+                  className="card-glow w-full bg-slate-800/50 backdrop-blur-sm rounded-2xl p-5 text-center hover:bg-slate-700/50 transition-all group hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10"
+                >
+                  <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-4 overflow-hidden bg-slate-900/40 group-hover:bg-slate-700/60 transition-all">
+                    <tool.Logo className="w-12 h-12" />
+                  </div>
+                  <h4 className="font-medium text-white text-sm mb-1">{tool.name}</h4>
+                  {tool.experience === 'In Progress' ? (
+                    <span className="text-xs text-amber-400">In Progress</span>
+                  ) : (
+                    <span className="text-xs text-blue-400">{tool.experience}</span>
+                  )}
+                </button>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -1700,7 +1698,7 @@ function App() {
             </button>
           </div>
 
-          {/* Geo Essentials Featured Case Study */}
+          {/* Art Geometry Featured Case Study */}
           <div className="mb-10">
             <button
               onClick={() => setGeoEssentialsCaseStudyOpen(true)}
@@ -1710,7 +1708,7 @@ function App() {
                 <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden bg-slate-200 dark:bg-slate-700 flex-shrink-0">
                   <img
                     src="/screenshots/portfolio/AG_22.png"
-                    alt="Geo Essentials Hero"
+                    alt="Art Geometry Hero"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-900/20" />
@@ -1733,9 +1731,9 @@ function App() {
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Shopify · Tech & Accessories</span>
                     </div>
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Geo Essentials — Tech & Desk Accessories Store</h3>
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Art Geometry — Tech & Desk Accessories Store</h3>
                     <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                      Designed and built a complete Shopify storefront for a tech accessories brand — featuring a curated homepage, GeoSETUP desk-space collection, trust-badge sections, customer reviews, FAQ, and community email capture.
+                      Designed and built a complete Shopify storefront for a tech accessories brand — featuring a curated homepage, ArtSETUP desk-space collection, trust-badge sections, customer reviews, FAQ, and community email capture.
                     </p>
                     <div className="flex flex-wrap gap-2 mb-5">
                       {['Store Setup', 'Collection Design', 'Homepage UX', 'Trust Badges', 'FAQ Build', 'Community CTA'].map((tag) => (
@@ -1754,50 +1752,6 @@ function App() {
                   <div className="flex items-center gap-3">
                     <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
                     <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
-                      View Full Case Study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </button>
-          </div>
-
-          {/* Art Geometry Featured Card */}
-          <div className="mb-10">
-            <button
-              onClick={() => setArtGeometryCaseStudyOpen(true)}
-              className="group w-full bg-gradient-to-br from-slate-50 to-stone-50 dark:from-slate-700 dark:to-slate-800 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-300 text-left border border-stone-200 dark:border-slate-600"
-            >
-              <div className="md:flex">
-                <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden bg-slate-100 dark:bg-slate-700 flex-shrink-0 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-20 h-20 bg-stone-200 dark:bg-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <FileText className="w-10 h-10 text-stone-500 dark:text-slate-400" />
-                    </div>
-                    <p className="text-stone-400 dark:text-slate-500 text-sm">Screenshots coming soon</p>
-                  </div>
-                  <div className="absolute top-3 left-3">
-                    <span className="bg-stone-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow">Case Study</span>
-                  </div>
-                </div>
-                <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xs font-semibold text-stone-600 dark:text-stone-400 uppercase tracking-widest">Shopify · Desk & Lifestyle</span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Art Geometry — Minimalist Desk & Lifestyle Store</h3>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                      Built a full Shopify storefront for a minimalist desk and lifestyle accessories brand — including homepage design, product collections, trust badges, testimonials, and FAQ sections.
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {['Shopify', 'Store Setup', 'Collection Mgmt'].map((tag) => (
-                        <span key={tag} className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2.5 py-1 rounded-lg">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
-                    <span className="text-sm font-semibold text-stone-600 dark:text-stone-400 flex items-center gap-1.5">
                       View Full Case Study <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
@@ -2736,40 +2690,50 @@ function App() {
           size="lg"
         >
           {(() => {
-            const skill = skills.find(s => s.name === skillModalOpen);
-            if (!skill) return null;
+            const skill = coreSkills.find(s => s.name === skillModalOpen);
+            const general = generalSkills.find(s => s.name === skillModalOpen);
+            const active = skill ?? general;
+            if (!active) return null;
 
             return (
               <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 rounded-2xl flex items-center justify-center">
-                    <skill.icon className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+                <div className="flex items-start gap-4">
+                  <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <active.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <p className="text-slate-600 dark:text-slate-400">{skill.description}</p>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{active.description}</p>
                 </div>
 
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Tools Used</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {skill.tools.map((tool, i) => (
-                      <span key={i} className="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium">
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                {skill && (
+                  <>
+                    <div>
+                      <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Tools Used</h4>
+                      <div className="grid sm:grid-cols-2 gap-3">
+                        {skill.toolsUsed.map((tool, i) => (
+                          <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-slate-700 rounded-xl">
+                            <Box className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                            <div>
+                              <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">{tool.name}</p>
+                              <p className="text-xs text-slate-500 dark:text-slate-400">{tool.blurb}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
 
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Sample Tasks</h4>
-                  <ul className="space-y-2">
-                    {skill.tasks.map((task, i) => (
-                      <li key={i} className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                        {task}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">How It Breaks Down</h4>
+                      <ul className="space-y-2">
+                        {skill.tasks.map((task, i) => (
+                          <li key={i} className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                            <CheckCircle2 className="w-4 h-4 text-blue-500 flex-shrink-0" />
+                            {task}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                )}
               </div>
             );
           })()}
@@ -3309,7 +3273,7 @@ function App() {
                 <span className="text-slate-400 text-xs">Shopify · Tech & Accessories</span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
-                Geo Essentials<br />
+                Art Geometry<br />
                 <span className="text-blue-400">Tech & Desk Accessories Store</span>
               </h2>
               <p className="text-slate-300 text-base leading-relaxed mb-6 max-w-2xl">
@@ -3326,87 +3290,21 @@ function App() {
             </div>
           </div>
 
-          {/* ── SECTION 1: Homepage & Collections ── */}
-          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">01 · Homepage & Collections</span>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">A Clean, Navigable Storefront</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
-                The homepage was structured around three core collections — Laptop, Smartphone, and Office Desk Essentials — each given a dedicated card for immediate visual hierarchy. The layout ensures shoppers know exactly where to go from the moment they land.
-              </p>
-              <ul className="space-y-3">
-                {[
-                  { title: 'Clear Category Architecture', desc: 'Three prominent collection cards guide visitors to Laptop, Smartphone, and Office Desk Essentials with zero friction' },
-                  { title: 'Brand Identity', desc: 'Consistent "Geo Essentials" branding, color palette, and typography applied site-wide' },
-                  { title: 'Visual Hierarchy', desc: 'Featured products surfaced above the fold with compelling imagery and CTA placement' },
-                ].map((item) => (
-                  <li key={item.title} className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
-                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-              <img
-                src="/screenshots/portfolio/AG_20.png"
-                alt="Geo Essentials Collections Grid"
-                className="w-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* ── SECTION 2: GeoSETUP Feature ── */}
-          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
-            <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-              <img
-                src="/screenshots/portfolio/AG_21.png"
-                alt="GeoSETUP Desk Space Section"
-                className="w-full object-cover"
-              />
-            </div>
-            <div className="order-1 lg:order-2">
-              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">02 · GeoSETUP Collection</span>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Maximize Desk Space — A Signature Sub-Brand</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
-                The GeoSETUP section was designed as a lifestyle statement — aspirational desk setup photography paired with a focused "Maximize Desk Space" message. This sub-brand within the store gives workspace accessories a premium identity that resonates with remote workers and creatives.
-              </p>
-              <ul className="space-y-3">
-                {[
-                  { title: 'Lifestyle Photography', desc: 'High-quality desk setup imagery that sells the dream, not just the product' },
-                  { title: 'Sub-brand Positioning', desc: 'GeoSETUP branded as its own collection, reinforcing store depth and specialization' },
-                  { title: 'Conversion-Focused Copy', desc: 'Headlines and CTAs written to motivate add-to-cart from the collection page itself' },
-                ].map((item) => (
-                  <li key={item.title} className="flex gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
-                    <div>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
-                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* ── SECTION 3: Hero Slider & Trust Badges ── */}
+          {/* ── SECTION 1: Hero Slider & Trust Badges ── */}
           <div className="mb-10">
-            <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">03 · Hero Slider & Trust Signals</span>
+            <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">01 · Hero Slider & Trust Signals</span>
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Building Credibility Above the Fold</h3>
             <div className="grid lg:grid-cols-5 gap-6 items-start">
               <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
                 <img
                   src="/screenshots/portfolio/AG_22.png"
-                  alt="Geo Essentials Hero and Trust Badges"
+                  alt="Art Geometry Hero and Trust Badges"
                   className="w-full object-cover"
                 />
               </div>
               <div className="lg:col-span-2 space-y-4">
                 <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                  A rotating hero slider was configured to highlight featured products and seasonal promotions, keeping the homepage fresh. Below the hero, a "Featured GEO-Products" strip with trust badges (Free Shipping, Secure Checkout, Easy Returns) was placed to immediately reduce purchase hesitation.
+                  A rotating hero slider was configured to highlight featured products and seasonal promotions, keeping the homepage fresh. Below the hero, a "Featured ART-Products" strip with trust badges (Free Shipping, Secure Checkout, Easy Returns) was placed to immediately reduce purchase hesitation.
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -3422,6 +3320,72 @@ function App() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* ── SECTION 2: Homepage & Collections ── */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">02 · Homepage & Collections</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">A Clean, Navigable Storefront</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                The homepage was structured around three core collections — Laptop, Smartphone, and Office Desk Essentials — each given a dedicated card for immediate visual hierarchy. The layout ensures shoppers know exactly where to go from the moment they land.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Clear Category Architecture', desc: 'Three prominent collection cards guide visitors to Laptop, Smartphone, and Office Desk Essentials with zero friction' },
+                  { title: 'Brand Identity', desc: 'Consistent "Art Geometry" branding, color palette, and typography applied site-wide' },
+                  { title: 'Visual Hierarchy', desc: 'Featured products surfaced above the fold with compelling imagery and CTA placement' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img
+                src="/screenshots/portfolio/AG_20.png"
+                alt="Art Geometry Collections Grid"
+                className="w-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* ── SECTION 3: ArtSETUP Feature ── */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img
+                src="/screenshots/portfolio/AG_21.png"
+                alt="ArtSETUP Desk Space Section"
+                className="w-full object-cover"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">03 · ArtSETUP Collection</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Maximize Desk Space — A Signature Sub-Brand</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                The ArtSETUP section was designed as a lifestyle statement — aspirational desk setup photography paired with a focused "Maximize Desk Space" message. This sub-brand within the store gives workspace accessories a premium identity that resonates with remote workers and creatives.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Lifestyle Photography', desc: 'High-quality desk setup imagery that sells the dream, not just the product' },
+                  { title: 'Sub-brand Positioning', desc: 'ArtSETUP branded as its own collection, reinforcing store depth and specialization' },
+                  { title: 'Conversion-Focused Copy', desc: 'Headlines and CTAs written to motivate add-to-cart from the collection page itself' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
@@ -3452,7 +3416,7 @@ function App() {
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
               <img
                 src="/screenshots/portfolio/AG_23.png"
-                alt="Geo Essentials Reviews and FAQ"
+                alt="Art Geometry Reviews and FAQ"
                 className="w-full object-cover"
               />
             </div>
@@ -3463,7 +3427,7 @@ function App() {
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
               <img
                 src="/screenshots/portfolio/AG_24.png"
-                alt="Geo Essentials Community and Footer"
+                alt="Art Geometry Community and Footer"
                 className="w-full object-cover"
               />
             </div>
@@ -3495,7 +3459,7 @@ function App() {
           <div className="bg-gradient-to-br from-blue-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 border border-blue-100 dark:border-slate-700">
             <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Project Summary</h4>
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
-              Geo Essentials was built from the ground up as a conversion-ready Shopify store. Every section — from the hero slider to the community email capture — was purposefully designed to move a visitor from discovery to purchase while establishing the brand's credibility in the tech accessories space.
+              Art Geometry was built from the ground up as a conversion-ready Shopify store. Every section — from the hero slider to the community email capture — was purposefully designed to move a visitor from discovery to purchase while establishing the brand's credibility in the tech accessories space.
             </p>
             <div className="grid sm:grid-cols-3 gap-4">
               {[
@@ -3511,84 +3475,6 @@ function App() {
             </div>
           </div>
 
-        </div>
-      </Modal>
-
-      {/* ============================================ */}
-      {/* ART GEOMETRY CASE STUDY MODAL */}
-      {/* ============================================ */}
-      <Modal
-        isOpen={artGeometryCaseStudyOpen}
-        onClose={() => setArtGeometryCaseStudyOpen(false)}
-        size="full"
-      >
-        <div className="space-y-0">
-          {/* Hero Header */}
-          <div className="relative bg-gradient-to-br from-slate-900 via-stone-900 to-slate-900 rounded-2xl overflow-hidden mb-10 p-8 lg:p-12">
-            <div className="relative z-10 max-w-3xl">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-stone-500/20 border border-stone-500/30 text-stone-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Case Study</span>
-                <span className="text-slate-400 text-xs">Shopify · Desk & Lifestyle</span>
-              </div>
-              <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-4 leading-tight">
-                Art Geometry<br />
-                <span className="text-stone-400">Minimalist Desk & Lifestyle Store</span>
-              </h2>
-              <p className="text-slate-300 text-base leading-relaxed mb-6 max-w-2xl">
-                A full Shopify storefront built for a minimalist desk and lifestyle accessories brand. The scope covered homepage design, product collections, trust badges, testimonials, and FAQ sections — all tuned for a clean, focused shopping experience.
-              </p>
-              <div className="flex flex-wrap gap-6 text-sm">
-                {[{ label: 'Platform', value: 'Shopify' }, { label: 'Niche', value: 'Desk & Lifestyle' }, { label: 'Scope', value: 'Full Store Build' }].map((s) => (
-                  <div key={s.label}>
-                    <div className="text-slate-400 text-xs mb-0.5">{s.label}</div>
-                    <div className="text-white font-semibold">{s.value}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Placeholder notice */}
-          <div className="mb-10 bg-stone-50 dark:bg-slate-800 rounded-2xl border-2 border-dashed border-stone-300 dark:border-slate-600 p-12 text-center">
-            <div className="w-16 h-16 bg-stone-200 dark:bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <FileText className="w-8 h-8 text-stone-400 dark:text-slate-500" />
-            </div>
-            <h4 className="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">Screenshots Coming Soon</h4>
-            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-sm mx-auto">Screenshots for Art Geometry will be uploaded here to complete this case study.</p>
-          </div>
-
-          {/* What was built */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-            {[
-              { title: 'Homepage Design', desc: 'Clean, minimal homepage structured to guide visitors through collections without visual clutter' },
-              { title: 'Product Collections', desc: 'Organized collections with consistent naming, imagery, and product placement' },
-              { title: 'Trust Badges', desc: 'Shipping, returns, and security trust signals placed at key decision points' },
-              { title: 'Testimonials', desc: 'Customer review section to build social proof and brand credibility' },
-              { title: 'FAQ Section', desc: 'Structured FAQ addressing shipping, returns, and product questions' },
-              { title: 'Brand Consistency', desc: 'Minimalist color palette and typography maintained throughout every page' },
-            ].map((item) => (
-              <div key={item.title} className="bg-slate-50 dark:bg-slate-800 rounded-xl p-5">
-                <h5 className="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">{item.title}</h5>
-                <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Summary */}
-          <div className="bg-gradient-to-br from-stone-50 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 border border-stone-100 dark:border-slate-700">
-            <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Project Summary</h4>
-            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
-              Art Geometry was built with restraint and intention — every design decision reflects the brand's minimalist philosophy. The result is a storefront that feels premium without excess, guiding visitors smoothly from discovery to checkout.
-            </p>
-            <div className="grid sm:grid-cols-3 gap-4">
-              {[{ label: 'Platform', value: 'Shopify' }, { label: 'Scope', value: 'Full Store Build' }, { label: 'Niche', value: 'Minimalist Lifestyle' }].map((s) => (
-                <div key={s.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
-                  <div className="text-base font-bold text-stone-600 dark:text-stone-400 mb-1">{s.value}</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </Modal>
 
@@ -3836,7 +3722,7 @@ function App() {
               <button
                 key={tab}
                 onClick={() => setSkillsTab(tab)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${skillsTab === tab ? 'bg-emerald-500 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${skillsTab === tab ? 'bg-blue-500 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'}`}
               >
                 {tab}
               </button>
