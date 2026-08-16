@@ -193,26 +193,13 @@ const PoshmarkLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   </svg>
 );
 
-// Zik Analytics — 3-bar gradient mark
+// Zik Analytics — three-bar gradient mark
 const ZikAnalyticsLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="zikGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#3ECFB2"/>
-        <stop offset="100%" stopColor="#8B5CF6"/>
-      </linearGradient>
-      <linearGradient id="zikGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#2FB8C4"/>
-        <stop offset="100%" stopColor="#7C5CE0"/>
-      </linearGradient>
-      <linearGradient id="zikGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#22A0D6"/>
-        <stop offset="100%" stopColor="#6B4CE0"/>
-      </linearGradient>
-    </defs>
-    <rect x="30" y="24" width="26" height="152" rx="13" fill="url(#zikGrad1)"/>
-    <rect x="87" y="24" width="26" height="152" rx="13" fill="url(#zikGrad2)" transform="rotate(12 100 100)"/>
-    <rect x="144" y="24" width="26" height="152" rx="13" fill="url(#zikGrad3)" transform="rotate(24 157 100)"/>
+  <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="48" height="48" rx="12" fill="#101A3D"/>
+    <path d="M15 32L20 16" stroke="#7B61FF" strokeWidth="4" strokeLinecap="round"/>
+    <path d="M23 32L28 16" stroke="#46B6F2" strokeWidth="4" strokeLinecap="round"/>
+    <path d="M31 32L36 16" stroke="#2F8BFF" strokeWidth="4" strokeLinecap="round"/>
   </svg>
 );
 
@@ -233,11 +220,12 @@ const VendooLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   </svg>
 );
 
-// Easync — simplified circular "S" monogram mark
+// Easync — cream circular "S" mark on a dark badge
 const EasyncLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="24" cy="24" r="23" fill="#F5F5F0" stroke="#1A1A1A" strokeWidth="1.5"/>
-    <text x="24" y="33" textAnchor="middle" fontSize="26" fontWeight="700" fontFamily="Georgia,'Times New Roman',serif" fill="#1A1A1A">S</text>
+    <rect width="48" height="48" rx="12" fill="#26344D"/>
+    <circle cx="24" cy="24" r="15" fill="#F5F5F0" stroke="#161616" strokeWidth="1.5"/>
+    <text x="24" y="31.5" textAnchor="middle" fontSize="21" fontWeight="700" fontFamily="Georgia,'Times New Roman',serif" fill="#161616">S</text>
   </svg>
 );
 
@@ -1989,7 +1977,7 @@ function App() {
                 </a>
 
                 <a
-                  href="https://onlinejobs.ph/jobseekers/raymart"
+                  href="https://www.onlinejobs.ph/jobseekers/info/4819047"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors group"
