@@ -1,72 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import LampIntro from './LampIntro';
+import ContourIntro from './ContourIntro';
+import EcommerceBackground from './EcommerceBackground';
 import { cn } from './lib/utils';
-import {
-  Mail,
-  Phone,
-  Calendar,
-  FileText,
-  Download,
-  ExternalLink,
-  ShoppingBag,
-  Search,
-  TrendingUp,
-  RefreshCw,
-  Package,
-  BarChart3,
-  Database,
-  FileSpreadsheet,
-  PenTool,
-  Users,
-  Target,
-  Zap,
-  Award,
-  Clock,
-  Shield,
-  Star,
-  ChevronUp,
-  Menu,
-  X,
-  CheckCircle2,
-  Layers,
-  Box,
-  Globe,
-  Briefcase,
-  Send,
-  ChevronLeft,
-  ChevronRight,
-  ZoomIn,
-  Settings,
-  Sun,
-  Moon,
-  Sparkles,
-  Eye,
-  Play,
-  Pause,
-  Maximize2,
-  XCircle,
-  Info,
-  AlertCircle,
-  MessageSquare,
-  Building2,
-  DollarSign,
-  Clock3,
-  ArrowRight,
-  Heart,
-  ThumbsUp,
-  Monitor,
-  LayoutGrid,
-  List,
-  FileImage,
-  ImageOff,
-  Edit3,
-  Lightbulb,
-  Lock,
-  HelpCircle,
-  FileDown,
-  Loader2,
-} from 'lucide-react';
+import { Mail, Phone, Calendar, FileText, Download, ExternalLink, ShoppingBag, Search, TrendingUp, RefreshCw, Package, BarChart3, Database, FileSpreadsheet, PenTool, Users, Target, Zap, Award, Clock, Shield, Star, ChevronUp, Menu, X, CheckCircle2, Layers, Box, Globe, Briefcase, Send, ChevronLeft, ChevronRight, ZoomIn, Settings, Sun, Moon, Sparkles, Eye, Play, Pause, Maximize2, XCircle, Info, AlertCircle, MessageSquare, Building2, DollarSign, Clock3, ArrowRight, Heart, ThumbsUp, Monitor, LayoutGrid, List, FileImage, ImageOff, CreditCard as Edit3, Lightbulb, Lock, HelpCircle, FileDown, Loader2 } from 'lucide-react';
 
 // ============================================
 // TYPE DEFINITIONS
@@ -515,10 +452,6 @@ function App() {
   const [skillsTab, setSkillsTab] = useState<'Platforms' | 'Tools'>('Platforms');
   const [contactTab, setContactTab] = useState<'Send a Message' | 'Schedule a Call'>('Send a Message');
 
-  // Lamp login widget
-  const [lampOn, setLampOn] = useState(false);
-  const [loginCardVisible, setLoginCardVisible] = useState(false);
-
   // Settings
   const [darkMode, setDarkMode] = useState(false);
   const [animationsEnabled, setAnimationsEnabled] = useState(true);
@@ -567,8 +500,8 @@ function App() {
       id: 'product-listing',
       icon: ShoppingBag,
       title: 'Product Listing',
-      description: 'Professional product listings optimized for maximum visibility and conversions.',
-      overview: 'Create compelling, SEO-optimized product listings that convert browsers into buyers across Shopify, Amazon, eBay, and Poshmark.',
+      description: 'Professional product listings optimized for visibility and conversions on Shopify and eBay.',
+      overview: 'Create compelling, well-structured product listings that convert browsers into buyers across Shopify and eBay.',
       process: [
         'Research product specifications and market positioning',
         'Optimize titles with high-converting keywords',
@@ -577,8 +510,8 @@ function App() {
         'Add high-quality images following platform guidelines',
         'Set up category-specific attributes and tags',
       ],
-      deliverables: ['Complete product listings', 'SEO-optimized titles and descriptions', 'Proper categorization', 'Variant configuration', 'Image optimization'],
-      tools: ['Shopify', 'Amazon Seller Central', 'eBay Seller Hub', 'Poshmark'],
+      deliverables: ['Complete product listings', 'Optimized titles and descriptions', 'Proper categorization', 'Variant configuration', 'Image optimization'],
+      tools: ['Shopify Admin', 'eBay Seller Hub'],
       results: ['50% increase in product visibility', '30% improvement in conversion rates', 'Reduced listing time by 60%'],
       faq: [
         { q: 'How long does it take to list a product?', a: 'Typically 15-30 minutes per listing depending on complexity and platform.' },
@@ -586,94 +519,10 @@ function App() {
       ],
     },
     {
-      id: 'product-research',
-      icon: Search,
-      title: 'Product Research',
-      description: 'Data-driven research to identify profitable products and market opportunities.',
-      overview: 'Comprehensive product research using advanced tools to identify profitable opportunities with low competition and high demand.',
-      process: [
-        'Analyze market trends and demand',
-        'Research competitor pricing and strategies',
-        'Identify profitable niches',
-        'Calculate profit margins and ROI',
-        'Generate research reports with recommendations',
-      ],
-      deliverables: ['Detailed research reports', 'Competitor analysis', 'Profit margin calculations', 'Product recommendations', 'Market insights'],
-      tools: ['Zik Analytics', 'Google Trends', 'Amazon Best Sellers', 'eBay Terapeak'],
-      results: ['Identified 100+ profitable products', 'Average 40% profit margin', 'Reduced research time by 50%'],
-      faq: [
-        { q: 'What platforms do you research?', a: 'I research across Amazon, eBay, Shopify, and Poshmark based on your target market.' },
-        { q: 'How many products do you research?', a: 'Packages range from 10 to 100+ products based on your needs.' },
-      ],
-    },
-    {
-      id: 'seo-optimization',
-      icon: TrendingUp,
-      title: 'SEO Optimization',
-      description: 'Strategic keyword integration to improve search rankings and drive organic traffic.',
-      overview: 'Optimize your listings with strategic keywords, meta descriptions, and tags to rank higher in platform search results.',
-      process: [
-        'Keyword research for your niche',
-        'Optimize product titles',
-        'Rewrite descriptions with SEO best practices',
-        'Configure meta descriptions and tags',
-        'Implement backend keywords',
-      ],
-      deliverables: ['Keyword research report', 'Optimized titles', 'SEO descriptions', 'Backend keywords', 'Performance tracking setup'],
-      tools: ['Zik Analytics', 'Helium 10', 'Google Keyword Planner', 'Platform analytics'],
-      results: ['40% improvement in search rankings', 'Doubled organic traffic', 'Increased click-through rates by 25%'],
-      faq: [
-        { q: 'How long until I see results?', a: 'SEO improvements typically show results within 2-4 weeks.' },
-        { q: 'Do you guarantee rankings?', a: 'While I use proven strategies, rankings depend on many factors. I guarantee significant optimization improvement.' },
-      ],
-    },
-    {
-      id: 'description-writing',
-      icon: PenTool,
-      title: 'Description Writing',
-      description: 'Compelling, SEO-friendly product descriptions that engage customers and drive sales.',
-      overview: 'Craft persuasive product descriptions that tell your product story while incorporating SEO best practices for maximum visibility.',
-      process: [
-        'Understand product features and benefits',
-        'Research target audience pain points',
-        'Write benefit-focused copy',
-        'Incorporate keywords naturally',
-        'Format for readability and scanability',
-      ],
-      deliverables: ['Compelling product descriptions', 'Feature-benefit analysis', 'SEO-optimized copy', 'Bullet point highlights', 'Call-to-action elements'],
-      tools: ['Canva', 'Grammarly', 'Hemingway Editor', 'Platform editors'],
-      results: ['25% increase in conversion rates', 'Lower bounce rates', 'Improved customer engagement'],
-      faq: [
-        { q: 'What makes your descriptions different?', a: 'I focus on benefits over features, use persuasive copywriting techniques, and optimize for both SEO and readability.' },
-        { q: 'What length should descriptions be?', a: 'I optimize length per platform requirements - typically 150-300 words for optimal performance.' },
-      ],
-    },
-    {
-      id: 'crosslisting',
-      icon: RefreshCw,
-      title: 'Crosslisting Management',
-      description: 'Efficient crosslisting across multiple platforms to maximize reach and streamline operations.',
-      overview: 'List your products across multiple marketplaces simultaneously, maintaining consistent inventory and avoiding overselling.',
-      process: [
-        'Set up crosslisting workflow',
-        'Configure platform-specific templates',
-        'Sync inventory across platforms',
-        'Monitor listings for errors',
-        'Optimize for each platform requirements',
-      ],
-      deliverables: ['Cross-platform listings', 'Inventory sync setup', 'Platform-specific optimization', 'Listing templates', 'Error monitoring'],
-      tools: ['Vendoo', 'Easync', 'List Perfectly', 'Manual management tools'],
-      results: ['50% reduction in listing time', 'Multiplied sales channels', 'Zero overselling incidents'],
-      faq: [
-        { q: 'Which platforms can you crosslist to?', a: 'Shopify, Amazon, eBay, Poshmark, Mercari, Facebook Marketplace, and more.' },
-        { q: 'How do you prevent overselling?', a: 'Real-time inventory sync and monitoring to automatically remove sold items across all platforms.' },
-      ],
-    },
-    {
       id: 'order-fulfillment',
       icon: Package,
       title: 'Order Fulfillment',
-      description: 'End-to-end order processing, tracking, and fulfillment coordination.',
+      description: 'End-to-end order processing, tracking, and fulfillment coordination on Shopify and eBay.',
       overview: 'Manage your orders from purchase to delivery, ensuring customer satisfaction with timely processing and communication.',
       process: [
         'Monitor incoming orders',
@@ -684,53 +533,53 @@ function App() {
         'Handle customer inquiries',
       ],
       deliverables: ['Order processing', 'Shipping label creation', 'Tracking updates', 'Customer communication', 'Issue resolution'],
-      tools: ['Shipping platforms', 'Platform order management', 'Tracking tools', 'Customer service software'],
+      tools: ['Shopify Orders', 'eBay Seller Hub', 'Shipping platforms', 'Tracking tools'],
       results: ['99.9% accuracy rate', 'Same-day processing', 'Improved customer satisfaction scores'],
       faq: [
         { q: 'Do you handle physical fulfillment?', a: 'I manage the administrative side. Physical packing is typically handled by you or your fulfillment center, but I coordinate everything.' },
-        { q: 'What platforms do you support?', a: 'All major e-commerce platforms including Shopify, Amazon FBA/MFN, eBay, and Poshmark.' },
+        { q: 'What platforms do you support?', a: 'Shopify and eBay.' },
       ],
     },
     {
-      id: 'inventory-tracking',
-      icon: Database,
-      title: 'Inventory Tracking',
-      description: 'Real-time inventory management to prevent stockouts and maintain accuracy.',
-      overview: 'Maintain accurate inventory records across all platforms with real-time updates and automated alerts.',
+      id: 'customer-support',
+      icon: Users,
+      title: 'Customer Support',
+      description: 'Prompt, professional resolution of buyer inquiries across Shopify and eBay.',
+      overview: 'Handle customer messages quickly and professionally — order status, refunds, replacements, shipping issues — keeping satisfaction high.',
       process: [
-        'Set up inventory management system',
-        'Sync across all sales channels',
-        'Monitor stock levels',
-        'Generate reorder alerts',
-        'Update listings automatically',
+        'Triage incoming messages',
+        'Investigate the issue',
+        'Draft a clear resolution',
+        'Follow up with the buyer',
+        'Escalate when needed',
       ],
-      deliverables: ['Inventory dashboard', 'Stock level monitoring', 'Reorder alerts', 'Sales reports', 'Platform sync'],
-      tools: ['Google Sheets', 'Excel', 'Platform inventory tools', 'Third-party management software'],
-      results: ['60% reduction in stockouts', '99% inventory accuracy', 'Automated reorder system'],
+      deliverables: ['Inbox management', 'Refund & replacement coordination', 'Shipping issue resolution', 'Escalation handling', 'Resolution records'],
+      tools: ['Shopify Inbox', 'eBay Messages', 'Gmail', 'Google Sheets'],
+      results: ['High satisfaction rate', 'Reduced response time', 'Repeat customer retention', 'Clean resolution records'],
       faq: [
-        { q: 'How often is inventory updated?', a: 'Real-time sync across platforms, with manual audits as needed.' },
-        { q: 'Can you handle multi-location inventory?', a: 'Yes, I can track inventory across multiple warehouses and locations.' },
+        { q: 'How quickly do you respond?', a: 'Most messages are answered within a few hours; urgent items the same day.' },
+        { q: 'Do you handle difficult customers?', a: 'Yes — I stay professional and focused on actually solving the problem, not just apologizing for it.' },
       ],
     },
     {
-      id: 'marketplace-support',
+      id: 'ecommerce-general-support',
       icon: Globe,
-      title: 'Marketplace Support',
-      description: 'Comprehensive support across all major e-commerce platforms.',
-      overview: 'Full-service support for all major marketplaces including account management, listing optimization, and customer service.',
+      title: 'E-Commerce General Support',
+      description: 'Day-to-day operational support to keep your Shopify and eBay stores running smoothly.',
+      overview: 'From store maintenance to inbox triage, inventory checks, and admin tasks — the general support that keeps your e-commerce operation organized and moving.',
       process: [
-        'Platform setup and optimization',
-        'Account health monitoring',
-        'Issue resolution and appeals',
-        'Customer service management',
-        'Performance reporting',
+        'Assess daily operational needs',
+        'Prioritize urgent tasks',
+        'Execute listings, updates, or admin work',
+        'Communicate progress',
+        'Review and reconcile',
       ],
-      deliverables: ['Platform optimization', 'Account health monitoring', 'Issue resolution', 'Customer support', 'Performance reports'],
-      tools: ['All major platforms', 'Help desk software', 'Analytics tools', 'Communication platforms'],
-      results: ['Maintained 100% account health', 'Resolved 95% of issues within 24 hours', 'Improved seller metrics'],
+      deliverables: ['Store maintenance', 'Inbox triage', 'Inventory checks', 'Admin task completion', 'Daily progress updates'],
+      tools: ['Shopify Admin', 'eBay Seller Hub', 'Google Sheets', 'Gmail'],
+      results: ['Organized operations', 'Faster turnaround on routine tasks', 'Fewer missed items', 'Reliable daily coverage'],
       faq: [
-        { q: 'Which platforms do you support?', a: 'Shopify, Amazon Seller Central, eBay Seller Hub, Poshmark, Mercari, Facebook Marketplace, and more.' },
-        { q: 'Can you help with account issues?', a: 'Yes, I assist with appeals, policy violations, and account reinstatement processes.' },
+        { q: 'What does general support include?', a: 'Anything that keeps the store running — listing updates, inventory checks, email triage, order follow-ups, and small admin tasks.' },
+        { q: 'Do you offer ongoing monthly support?', a: 'Yes — I offer retainer packages for sellers who need continuous day-to-day support.' },
       ],
     },
   ];
@@ -843,24 +692,6 @@ function App() {
       screenshots: [],
     },
     {
-      id: 'seo-optimization',
-      title: 'SEO Optimized Listings',
-      platforms: ['Amazon', 'eBay'],
-      description: 'Improved search rankings by 40% through strategic keyword research and listing optimization.',
-      overview: 'Complete SEO overhaul for Amazon and eBay stores in the outdoor equipment niche.',
-      objective: 'Improve organic search rankings and increase traffic.',
-      responsibilities: ['Keyword research', 'Title optimization', 'Description rewriting', 'Backend keyword implementation'],
-      process: ['Competitor analysis', 'Keyword gap research', 'Title A/B testing', 'Bulk optimization', 'Performance tracking'],
-      outcome: '40% improvement in search rankings within 60 days.',
-      tools: ['Helium 10', 'Zik Analytics', 'Amazon Seller Central', 'eBay Seller Hub'],
-      skills: ['SEO', 'Keyword Research', 'Listing Optimization', 'Analytics'],
-      results: ['40% ranking improvement', '2x organic traffic', '25% conversion increase', '15 new first-page rankings'],
-      category: 'SEO',
-      date: '2024',
-      status: 'Completed',
-      screenshots: [],
-    },
-    {
       id: 'product-research',
       title: 'Customer Support & Ticket Resolution',
       platforms: ['Customer Support'],
@@ -880,47 +711,6 @@ function App() {
         '/screenshots/customer support resolution/757_number_chat.png',
         '/screenshots/customer support resolution/chicago_theater_chat.png',
         '/screenshots/customer support resolution/fort_worth_tx_chat.png',
-      ],
-    },
-    {
-      id: 'inventory-management',
-      title: 'Inventory Management Sheets',
-      platforms: ['Google Sheets', 'Excel'],
-      description: 'Built automated inventory tracking systems reducing stockouts by 60%.',
-      overview: 'Custom inventory management system for multi-channel e-commerce business.',
-      objective: 'Create automated inventory tracking across 4 platforms.',
-      responsibilities: ['System design', 'Formula creation', 'Automation setup', 'Training'],
-      process: ['Requirements analysis', 'System design', 'Build templates', 'Automate syncs', 'Testing and training'],
-      outcome: '60% reduction in stockouts, real-time visibility.',
-      tools: ['Google Sheets', 'Google Apps Script', 'Excel', 'Inventory APIs'],
-      skills: ['Spreadsheet Design', 'Automation', 'API Integration', 'Data Analysis'],
-      results: ['60% stockout reduction', 'Real-time sync', 'Automated alerts', 'Custom dashboards'],
-      category: 'Systems',
-      date: '2024',
-      status: 'Completed',
-      screenshots: [
-        '/screenshots/crosslisting/62f70dc5-f5a8-4b7c-8b38-fa05d2ccbec7.png',
-      ],
-    },
-    {
-      id: 'email-management',
-      title: 'Email Management',
-      platforms: ['Gmail', 'Google Workspace'],
-      description: 'Managed inbox triage, order confirmations, supplier correspondence, and customer inquiries — keeping the inbox at zero unresolved.',
-      overview: 'Comprehensive email management for e-commerce operations across order, supplier, and customer threads.',
-      objective: 'Keep the inbox organized and ensure no message goes unanswered, with urgent items actioned the same day.',
-      responsibilities: ['Inbox triage & sorting', 'Order confirmation handling', 'Supplier correspondence', 'Urgent issue flagging', 'Response tracking'],
-      process: ['Inbox review & categorization', 'Order confirmation matching', 'Supplier follow-ups', 'Urgent issue escalation', 'Response drafting & sending'],
-      outcome: 'Maintained a zero-unresolved inbox with same-day response on all urgent items.',
-      tools: ['Gmail', 'Google Sheets', 'Google Workspace', 'Platform Messaging'],
-      skills: ['Email Management', 'Communication', 'Organization', 'Prioritization'],
-      results: ['Zero unresolved inbox', 'Same-day urgent response', 'Organized order tracking', 'Improved supplier communication'],
-      category: 'Systems',
-      date: '2024',
-      status: 'Ongoing',
-      screenshots: [
-        '/screenshots/email management/inbox_screenshot.png',
-        '/screenshots/email management/gmail_sold_tickets.png',
       ],
     },
   ];
@@ -962,19 +752,16 @@ function App() {
 
   const stats = [
     { value: 1000, label: 'Products Listed', suffix: '+' },
-    { value: 500, label: 'Orders Processed', suffix: '+' },
-    { value: 4, label: 'Marketplaces Managed', suffix: '' },
-    { value: 100, label: 'SEO Optimized Listings', suffix: '+' },
+    { value: 500, label: 'Orders Fulfilled', suffix: '+' },
+    { value: 2, label: 'Platforms Covered', suffix: '' },
+    { value: 100, label: 'Buyer Satisfaction', suffix: '%' },
   ];
 
   const howIHelp = [
     { title: 'Product Listing', description: 'Professional listings optimized for visibility and conversions' },
-    { title: 'Product Research', description: 'Data-driven product identification and analysis' },
-    { title: 'SEO Optimization', description: 'Strategic keyword implementation for higher rankings' },
-    { title: 'Crosslisting', description: 'Multi-platform selling with inventory sync' },
-    { title: 'Inventory Tracking', description: 'Real-time stock management and alerts' },
     { title: 'Order Fulfillment', description: 'End-to-end order processing and tracking' },
-    { title: 'Marketplace Management', description: 'Complete platform account management' },
+    { title: 'Customer Support', description: 'Prompt, professional buyer issue resolution' },
+    { title: 'General Support', description: 'Day-to-day store operations and admin tasks' },
   ];
 
   const navLinks = [
@@ -987,21 +774,14 @@ function App() {
   ];
 
   const serviceOptions = [
-    'Shopify Product Listing',
-    'Amazon Listing',
-    'eBay Listing',
-    'Poshmark Listing',
-    'Product Research',
-    'SEO Optimization',
-    'Description Writing',
-    'Crosslisting',
+    'Product Listing',
     'Order Fulfillment',
-    'Inventory Management',
-    'General E-Commerce Support',
+    'Customer Support',
+    'E-Commerce General Support',
   ];
 
-  const platformOptions = ['Shopify', 'Amazon', 'eBay', 'Poshmark', 'Multiple Platforms', 'Other'];
-  const budgetOptions = ['Under $3,000', '$3,000 – $7,000', '$7,000 – $15,000', '$15,000+'];
+  const platformOptions = ['Shopify', 'eBay', 'Both Shopify & eBay'];
+  const budgetOptions = ['$5/hr', '$8/hr', '$10/hr', '$12/hr', '$15/hr'];
   const timeZones = ['UTC-8 (Pacific)', 'UTC-5 (Eastern)', 'UTC+0 (GMT)', 'UTC+8 (Philippines)', 'Other'];
   const contactMethods = ['Video Call (Zoom/Google Meet)', 'Phone Call', 'Email', 'Chat'];
 
@@ -1127,7 +907,7 @@ function App() {
 
   if (showIntro) {
     return (
-      <LampIntro
+      <ContourIntro
         onComplete={() => {
           sessionStorage.setItem('lampIntroSeen', 'true');
           setShowIntro(false);
@@ -1263,7 +1043,7 @@ function App() {
 
               <Reveal delay={300}>
                 <p className="text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  Helping online stores scale through product listings, SEO optimization, crosslisting, product research, and order fulfillment — across Shopify, Amazon, eBay, and Poshmark.
+                  Helping online stores scale through product listing, order fulfillment, customer support, and general e-commerce support — across Shopify and eBay.
                 </p>
               </Reveal>
 
@@ -1293,7 +1073,6 @@ function App() {
                   <div className="flex items-center gap-3 justify-center lg:justify-start flex-wrap">
                     {[
                       { src: '/logos/shopify/image.png', alt: 'Shopify', bg: 'bg-white' },
-                      { src: '/logos/amazon/image.png', alt: 'Amazon', bg: 'bg-black' },
                       { src: '/logos/ebay/image.png', alt: 'eBay', bg: 'bg-white' },
                     ].map((p) => (
                       <div key={p.alt} className={`w-11 h-11 ${p.bg} rounded-xl shadow-md flex items-center justify-center p-2 border border-white/10`}>
@@ -1343,10 +1122,10 @@ function App() {
                   </div>
                 </div>
 
-                {/* Floating: Amazon */}
+                {/* Floating: eBay */}
                 <div className="absolute bottom-1/3 -right-4 sm:-right-10 bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-2.5 border border-white/10 z-30 animate-float-delayed">
-                  <div className="w-9 h-9 bg-black rounded-lg flex items-center justify-center p-1.5">
-                    <img src="/logos/amazon/image.png" alt="Amazon" className="w-full h-full object-contain" />
+                  <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center p-1.5">
+                    <img src="/logos/ebay/image.png" alt="eBay" className="w-full h-full object-contain" />
                   </div>
                 </div>
 
@@ -1437,12 +1216,18 @@ function App() {
               </h2>
 
               <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                Shopify, Amazon & eBay E-Commerce VA
+                Shopify &amp; eBay E-Commerce VA
               </p>
 
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
-                I help e-commerce businesses streamline operations through product listing, SEO optimization, product research, crosslisting, inventory management, and order fulfillment. My goal is to help online stores save time, stay organized, and grow efficiently across multiple marketplaces.
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                I help e-commerce businesses streamline operations through product listing, order fulfillment, customer support, and general e-commerce support. My goal is to help online stores save time, stay organized, and grow efficiently across Shopify and eBay.
               </p>
+
+              <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-xl px-4 py-3 mb-8">
+                <DollarSign className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <span className="font-semibold text-slate-900 dark:text-white">$5 – $15 / hour</span>
+                <span className="text-sm text-slate-500 dark:text-slate-400">· Fixed rate, no surprises</span>
+              </div>
 
               <div className="flex flex-wrap gap-4">
                 <button
@@ -1472,26 +1257,26 @@ function App() {
                         <ShoppingBag className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Product Listings</h4>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">Professional listings across all platforms</p>
+                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Product Listing</h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">Professional listings on Shopify and eBay</p>
                       </div>
                     </div>
                     <div className="bg-slate-50 dark:bg-slate-700 rounded-2xl p-5 flex items-start gap-4">
                       <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Search className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                        <Package className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Product Research</h4>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">Data-driven insights for profitability</p>
+                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Order Fulfillment</h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">End-to-end order processing and tracking</p>
                       </div>
                     </div>
                     <div className="bg-slate-50 dark:bg-slate-700 rounded-2xl p-5 flex items-start gap-4">
                       <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <TrendingUp className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                        <Users className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1">SEO Optimization</h4>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">Rank higher, sell more</p>
+                        <h4 className="font-semibold text-slate-900 dark:text-white mb-1">Customer Support</h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">Fast, professional buyer issue resolution</p>
                       </div>
                     </div>
                   </div>
@@ -3818,61 +3603,14 @@ function App() {
         </div>
       </Modal>
 
-      {/* ===== FLOATING LAMP LOGIN WIDGET ===== */}
-      <div className="fixed bottom-6 right-6 z-50 hidden sm:flex flex-col items-end gap-4">
-        {/* Login card */}
-        <div
-          className="transition-all duration-300 origin-bottom-right"
-          style={{
-            opacity: loginCardVisible ? 1 : 0,
-            transform: loginCardVisible ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.95)',
-            pointerEvents: loginCardVisible ? 'auto' : 'none',
-          }}
-        >
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 w-80 shadow-2xl">
-            <p className="text-sm text-slate-400 mb-4 uppercase tracking-wider font-medium">Client Login</p>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-              <div>
-                <label className="text-sm text-slate-300 mb-1.5 block">Username</label>
-                <input className="w-full px-4 py-2.5 bg-slate-800 border border-slate-600 rounded-lg text-sm text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none" placeholder="username" />
-              </div>
-              <div>
-                <label className="text-sm text-slate-300 mb-1.5 block">Password</label>
-                <input type="password" className="w-full px-4 py-2.5 bg-slate-800 border border-slate-600 rounded-lg text-sm text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none" placeholder="••••••••" />
-              </div>
-              <button type="submit" className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-lg transition-colors">Sign In</button>
-            </form>
-          </div>
-        </div>
-
-        {/* Lamp toggle */}
-        <button
-          onClick={() => {
-            if (lampOn) {
-              setLoginCardVisible(false);
-              setTimeout(() => setLampOn(false), 250);
-            } else {
-              setLampOn(true);
-              setTimeout(() => setLoginCardVisible(true), 150);
-            }
-          }}
-          className="relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-400"
-          style={{
-            background: lampOn ? 'rgba(16,185,129,0.12)' : 'rgba(100,116,139,0.08)',
-            boxShadow: lampOn
-              ? '0 0 36px 10px rgba(16,185,129,0.5), 0 0 90px 30px rgba(16,185,129,0.3), inset 0 0 18px rgba(16,185,129,0.25)'
-              : 'none',
-          }}
-          aria-label="Client login"
-          title="Client Login"
-        >
-          <Lightbulb
-            className="w-12 h-12 transition-colors duration-400"
-            style={{ color: lampOn ? '#10b981' : '#64748b' }}
-          />
-          <span className="absolute -bottom-6 text-xs text-slate-400 whitespace-nowrap font-medium">Admin</span>
-        </button>
-      </div>
+      {/* ===== FLOATING CONTACT WIDGET ===== */}
+      <a
+        href="#contact"
+        className="fixed bottom-6 right-6 z-50 hidden sm:flex items-center justify-center w-16 h-16 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg shadow-emerald-500/30 transition-all hover:scale-105"
+        aria-label="Contact me"
+      >
+        <Mail className="w-7 h-7 text-white" />
+      </a>
     </div>
   );
 }

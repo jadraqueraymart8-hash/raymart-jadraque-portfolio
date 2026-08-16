@@ -231,6 +231,19 @@
   transform: translateY(-2px);
 }
 
+/* Floating ecommerce background drift */
+@keyframes ec-float-drift {
+  0% {
+    transform: translate(0, 0) rotate(-2deg) scale(1);
+  }
+  50% {
+    transform: translate(30px, -40px) rotate(2deg) scale(1.08);
+  }
+  100% {
+    transform: translate(-20px, 20px) rotate(-1deg) scale(0.95);
+  }
+}
+
 /* Lighter variant for light mode */
 .dark .card-glow {
   border: 1px solid rgba(0, 242, 254, 0.10);
