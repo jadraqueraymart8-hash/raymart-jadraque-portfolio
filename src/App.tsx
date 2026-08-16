@@ -591,7 +591,7 @@ function App() {
       description: 'Listing a product starts with sourcing and validating it through sales data, reviews, and pricing research. From there, I rewrite the title and description for SEO and brand voice, set accurate pricing with the right markup, organize variants and stock, and place it in the correct collection. I also clean up product images to match the store\'s aesthetic and fill in SEO fields before publishing — always reviewing everything in Draft before it goes live.',
       toolsUsed: [
         { name: 'Shopify Admin', blurb: 'Product creation, variants, collections, and SEO fields' },
-        { name: 'Zik Analytics', blurb: 'Sourcing and validating products with sales data' },
+        { name: 'eBay Seller Hub', blurb: 'Listing creation and management' },
       ],
       tasks: ['Product sourcing & validation', 'SEO-optimized titles & descriptions', 'Pricing & markup', 'Variant & stock setup', 'Image cleanup', 'Draft review before publishing'],
     },
@@ -600,8 +600,8 @@ function App() {
       icon: Package,
       description: 'Order fulfillment means the order isn\'t done until the customer actually has it in hand. I confirm supplier stock, place and track the order, monitor for delays or price changes, and update tracking so the buyer is never left guessing. If something goes wrong — a cancelled item, a price jump, a shipping delay — I catch it early and resolve it before it becomes a complaint.',
       toolsUsed: [
-        { name: 'Easync', blurb: 'Automated order placement and tracking sync' },
-        { name: 'Platform Order Managers', blurb: 'Monitoring status across every sales channel' },
+        { name: 'Shopify Orders', blurb: 'Order processing and tracking on Shopify' },
+        { name: 'eBay Seller Hub', blurb: 'Order monitoring and fulfillment on eBay' },
       ],
       tasks: ['Order placement & tracking', 'Supplier stock monitoring', 'Delay & price-change alerts', 'Tracking updates to buyers', 'Cancellation handling'],
     },
@@ -610,45 +610,24 @@ function App() {
       icon: Users,
       description: 'Most customer messages are really the same handful of concerns — where\'s my order, can I get a refund, is this the right size. I answer quickly, stay polite even when the customer isn\'t, and actually solve the problem instead of just apologizing for it. For escalations, I coordinate between the customer, the platform, and the supplier until it\'s fully resolved, not just closed.',
       toolsUsed: [
-        { name: 'Platform Messaging', blurb: 'Shopify, eBay, and Amazon buyer-seller messaging' },
+        { name: 'Platform Messaging', blurb: 'Shopify and eBay buyer-seller messaging' },
         { name: 'Gmail', blurb: 'Order-related email threads and confirmations' },
       ],
       tasks: ['Order status inquiries', 'Refunds & replacements', 'Escalation coordination', 'Tone-appropriate responses', 'Follow-up until resolved'],
     },
     {
-      name: 'Product Research',
-      icon: Search,
-      description: 'Before I list anything, I check whether it\'s actually worth listing. That means pulling sales history, checking competition and pricing, reading reviews for red flags, and running the numbers on margin after fees and shipping. A product only gets added once it passes that checklist — not just because it looks good.',
+      name: 'E-Commerce General Support',
+      icon: Globe,
+      description: 'From store maintenance to inbox triage, inventory checks, and admin tasks — the general support that keeps your Shopify and eBay operation organized and moving. I assess what needs doing, prioritize urgent items, and keep everything on track day to day.',
       toolsUsed: [
-        { name: 'Zik Analytics', blurb: 'Sales history, competition, and profit calculation' },
-        { name: 'Google Trends', blurb: 'Demand and seasonality checks' },
+        { name: 'Shopify Admin', blurb: 'Store maintenance, updates, and admin tasks' },
+        { name: 'eBay Seller Hub', blurb: 'Listing updates and order management' },
       ],
-      tasks: ['Sales & demand data', 'Competition & pricing checks', 'Review red-flag screening', 'Margin calculation', 'Go/no-go decision'],
-    },
-    {
-      name: 'Inventory Management',
-      icon: Database,
-      description: 'Overselling is one of the fastest ways to lose a customer\'s trust, so I keep stock numbers accurate across every platform in real time. I build tracking sheets that flag low stock before it becomes a stockout, sync quantities after every sale, and reconcile counts regularly so what\'s listed always matches what\'s actually available.',
-      toolsUsed: [
-        { name: 'Google Sheets', blurb: 'Automated tracking sheets with low-stock alerts' },
-        { name: 'Easync', blurb: 'Multi-channel stock sync' },
-      ],
-      tasks: ['Real-time stock tracking', 'Low-stock alerts', 'Cross-platform sync', 'Stock reconciliation', 'Reporting'],
-    },
-    {
-      name: 'Email Management',
-      icon: Mail,
-      description: 'I keep the inbox at zero unresolved — sorting order confirmations, supplier updates, and customer questions so nothing sits unanswered. Routine messages get handled directly; anything time-sensitive (a delay, a cancelled order, a complaint) gets flagged and actioned the same day, not left to pile up.',
-      toolsUsed: [
-        { name: 'Gmail', blurb: 'Inbox triage, labels, and filters' },
-        { name: 'Google Sheets', blurb: 'Logging recurring issues and order references' },
-      ],
-      tasks: ['Inbox triage & sorting', 'Order confirmation handling', 'Supplier correspondence', 'Same-day flagging of urgent issues', 'Response tracking'],
+      tasks: ['Store maintenance', 'Inbox triage', 'Inventory checks', 'Admin task completion', 'Daily progress updates'],
     },
   ];
 
   const generalSkills = [
-    { name: 'SEO Optimization', icon: TrendingUp, description: 'Keyword research and on-page optimization — titles, descriptions, and backend tags — written to rank higher and still read naturally to a real buyer.' },
     { name: 'Description Writing', icon: PenTool, description: 'Product descriptions written in paragraph form, benefit-focused and SEO-aware, matching each brand\'s voice instead of sounding templated.' },
     { name: 'Data Entry', icon: FileSpreadsheet, description: 'Fast, accurate entry and cleanup of product and order data, with a strong eye for catching mismatched or missing fields before they cause problems.' },
     { name: 'Google Sheets', icon: FileSpreadsheet, description: 'Building tracking sheets, formulas, and simple dashboards for inventory, orders, and reporting — kept simple enough that anyone on the team can read them.' },
@@ -661,10 +640,7 @@ function App() {
     { name: 'Shopify', Logo: ({ className = "w-8 h-8" }: { className?: string }) => (
       <img src="/logos/shopify/image.png" alt="Shopify" className={`${className} object-contain drop-shadow-sm`} />
     ), experience: 'Expert', description: 'Complete store management from product listing to order fulfillment', tasks: ['Product management', 'Order processing', 'Analytics', 'Theme editing'] },
-    { name: 'Amazon Seller Central', Logo: AmazonLogo, experience: 'Expert', description: 'Full Amazon marketplace management including FBA and FBM', tasks: ['Listing creation', 'Inventory management', 'Advertising', 'Reports'] },
     { name: 'eBay Seller Hub', Logo: EBayLogo, experience: 'Expert', description: 'Complete eBay selling operations including international shipping', tasks: ['Listing management', 'Order processing', 'Promoted listings', 'Analytics'] },
-    { name: 'Zik Analytics', Logo: ZikAnalyticsLogo, experience: 'Advanced', description: 'eBay product research and market analysis', tasks: ['Product research', 'Competitor analysis', 'Profit calculation', 'Trend spotting'] },
-    { name: 'Easync', Logo: EasyncLogo, experience: 'Intermediate', description: 'Dropshipping automation and fulfillment', tasks: ['Product sourcing', 'Order automation', 'Price monitoring', 'Inventory sync'] },
     { name: 'Google Workspace', Logo: GoogleWorkspaceLogo, experience: 'Expert', description: 'Complete Google productivity suite — Gmail, Drive, Docs, Sheets, Calendar', tasks: ['Sheets', 'Docs', 'Drive', 'Calendar', 'Gmail'] },
     { name: 'Google Sheets', Logo: GoogleSheetsLogo, experience: 'Expert', description: 'Advanced spreadsheet management for inventory tracking and reporting', tasks: ['Inventory tracking', 'Formulas & automation', 'Dashboards', 'Reporting'] },
     { name: 'Microsoft Excel', Logo: ExcelLogo, experience: 'Advanced', description: 'Professional Excel for data analysis and business reporting', tasks: ['Data organization', 'Pivot tables', 'Reporting', 'Automation'] },
@@ -736,17 +712,17 @@ function App() {
     },
     {
       name: 'David K.',
-      role: 'Amazon FBA Seller',
-      content: 'Outstanding product research and crosslisting support. Ray made managing multiple platforms seamless and efficient. His research reports are thorough and actionable.',
+      role: 'eBay Store Owner',
+      content: 'Raymart streamlined our order fulfillment and customer support across eBay. Response times dropped and buyer satisfaction went up. Fast, reliable, and always organized.',
       rating: 5,
-      fullContent: 'As an Amazon FBA seller, I was struggling to expand to other platforms while maintaining inventory accuracy. Raymart set up our crosslisting workflow using Vendoo, and now we seamlessly sell on Amazon, eBay, and Poshmark without any overselling issues. His product research has helped us identify profitable products with 40%+ margins. The detailed reports he provides are actionable and have directly contributed to our growth. He is now an essential part of our team.',
+      fullContent: 'Running an eBay store with hundreds of active listings was overwhelming before Raymart joined. He took over order fulfillment, tracking updates, and customer support — our response times dropped significantly and buyer satisfaction scores improved. He also cleaned up our product listings with better titles and descriptions. His communication is excellent and he always meets deadlines. He is now an essential part of our team.',
     },
     {
       name: 'Jennifer L.',
-      role: 'Poshmark Boutique Owner',
-      content: 'Raymart\'s dedication and professionalism exceeded our expectations. Our inventory management has never been better. Fast, accurate, and always communicative.',
+      role: 'Shopify Store Owner',
+      content: 'Raymart\'s dedication and professionalism exceeded our expectations. Our store runs smoother than ever. Fast, accurate, and always communicative.',
       rating: 5,
-      fullContent: 'I run a Poshmark boutique with over 1,000 active listings, and inventory management was a nightmare before Raymart joined. He implemented a Google Sheets system that syncs across all our platforms, set up automated alerts for low stock, and manages our daily crosslisting. Our stockouts have been reduced by 60%, and listing time is down 50%. His professionalism, quick communication, and dedication to our success make him invaluable.',
+      fullContent: 'I run a Shopify store with a large catalog, and keeping everything organized was a nightmare before Raymart joined. He manages our product listings, handles daily customer inquiries, and keeps our inventory in check. Our stockouts have been reduced by 60%, and listing time is down 50%. His professionalism, quick communication, and dedication to our success make him invaluable.',
     },
   ];
 
@@ -2729,7 +2705,7 @@ function App() {
           <div>
             <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Professional Summary</h4>
             <p className="text-slate-600 dark:text-slate-400">
-              Experienced E-Commerce Virtual Assistant specializing in Shopify, Amazon, eBay, and Poshmark. Expert in product listing creation, SEO optimization, product research, crosslisting management, and order fulfillment. Proven track record of helping online stores scale efficiently through data-driven strategies and meticulous attention to detail.
+              Experienced E-Commerce Virtual Assistant specializing in Shopify and eBay. Expert in product listing creation, order fulfillment, customer support, and general e-commerce support. Proven track record of helping online stores scale efficiently through meticulous attention to detail and reliable day-to-day operations.
             </p>
           </div>
 
@@ -2737,7 +2713,7 @@ function App() {
           <div>
             <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Skills</h4>
             <div className="flex flex-wrap gap-2">
-              {['Product Listing', 'SEO Optimization', 'Product Research', 'Crosslisting', 'Order Fulfillment', 'Inventory Management', 'Shopify', 'Amazon Seller Central', 'eBay', 'Poshmark', 'Zik Analytics', 'Vendoo', 'Google Sheets', 'Excel', 'Customer Support'].map((skill, i) => (
+              {['Product Listing', 'Order Fulfillment', 'Customer Support', 'E-Commerce General Support', 'Shopify', 'eBay Seller Hub', 'Google Sheets', 'Excel', 'Canva', 'Gmail', 'Data Entry', 'Content Editing'].map((skill, i) => (
                 <span key={i} className="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-medium">
                   {skill}
                 </span>
@@ -2756,10 +2732,10 @@ function App() {
                 </div>
                 <p className="text-sm text-emerald-600 dark:text-emerald-400 mb-2">Freelance</p>
                 <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
-                  <li>• Managed product listings across Shopify, Amazon, eBay, and Poshmark</li>
-                  <li>• Conducted product research using Zik Analytics and other tools</li>
-                  <li>• Optimized 1,000+ product listings for SEO</li>
-                  <li>• Streamlined crosslisting workflows reducing listing time by 50%</li>
+                  <li>• Managed product listings across Shopify and eBay</li>
+                  <li>• Handled order fulfillment, tracking, and customer support</li>
+                  <li>• Optimized 1,000+ product listings for visibility and conversions</li>
+                  <li>• Streamlined store operations reducing listing time by 50%</li>
                 </ul>
               </div>
             </div>
@@ -3145,8 +3121,8 @@ function App() {
       <Modal isOpen={navModal === 'about'} onClose={() => setNavModal(null)} title="About Raymart" size="lg">
         <div className="space-y-6">
           <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-            I'm Raymart, a dedicated E-commerce Virtual Assistant specializing in product research, listing optimization,
-            and crosslisting across major marketplaces. I help sellers scale their operations with precision and efficiency.
+            I'm Raymart, a dedicated E-commerce Virtual Assistant specializing in product listing, order fulfillment,
+            customer support, and general e-commerce support across Shopify and eBay. I help sellers scale their operations with precision and efficiency.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {stats.map((s) => (
@@ -3723,7 +3699,7 @@ function App() {
             <h4 className="font-semibold text-slate-800 dark:text-slate-100 mb-3 flex items-center gap-2"><HelpCircle className="w-5 h-5 text-emerald-500" /> Frequently Asked Questions</h4>
             <div className="space-y-3">
               {[
-                { q: 'How long does a typical project take?', a: 'Most listing and research projects take 3–7 days. Larger crosslisting setups can take 1–2 weeks depending on catalog size.' },
+                { q: 'How long does a typical project take?', a: 'Most listing projects take 3–7 days. Larger store setups can take 1–2 weeks depending on catalog size.' },
                 { q: 'Do you sign NDAs?', a: 'Yes. I am happy to sign a mutual NDA before we begin any engagement to protect your business information.' },
                 { q: 'What is your typical process?', a: 'Discovery call → proposal → onboarding → execution with weekly progress updates → final delivery and review.' },
                 { q: 'Which payment methods do you accept?', a: 'PayPal, Wise, and direct bank transfer. Invoices are sent weekly or per milestone, whichever you prefer.' },
