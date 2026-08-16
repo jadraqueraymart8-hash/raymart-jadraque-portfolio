@@ -448,7 +448,7 @@ function App() {
   // Nav section modals (About / Services / Portfolio / Skills / Contact / Resources)
   const [navModal, setNavModal] = useState<string | null>(null);
   // Sub-navigation tabs inside nav modals
-  const [portfolioTab, setPortfolioTab] = useState<'Case Studies' | 'Product Listings' | 'SEO Projects'>('Case Studies');
+  const [portfolioTab, setPortfolioTab] = useState<'Case Studies' | 'Product Listings'>('Case Studies');
   const [skillsTab, setSkillsTab] = useState<'Platforms' | 'Tools'>('Platforms');
   const [contactTab, setContactTab] = useState<'Send a Message' | 'Schedule a Call'>('Send a Message');
 
@@ -1657,6 +1657,142 @@ function App() {
         </div>
       </section>
 
+      {/* Case Studies Section — SEO, Inventory, Email (no photos) */}
+      <section id="case-studies" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900 relative overflow-hidden">
+        <EcommerceBackground />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/50 border border-blue-200 dark:border-blue-700/50 rounded-full px-4 py-1.5 mb-6">
+              <span className="text-sm font-medium text-blue-700 dark:text-blue-400">Deep Dives</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Case Studies
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Operational work that keeps e-commerce stores running smoothly
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: TrendingUp,
+                title: 'SEO Optimized Listings',
+                category: 'Listing Optimization',
+                description: 'Improved search rankings by 40% through strategic keyword research and listing optimization across eBay stores.',
+                objective: 'Improve organic search rankings and increase traffic.',
+                responsibilities: ['Keyword research', 'Title optimization', 'Description rewriting', 'Backend keyword implementation'],
+                process: ['Competitor analysis', 'Keyword gap research', 'Title A/B testing', 'Bulk optimization', 'Performance tracking'],
+                outcome: '40% improvement in search rankings within 60 days.',
+                tools: ['eBay Seller Hub', 'Keyword Tools', 'Google Trends'],
+                results: ['40% ranking improvement', '2x organic traffic', '25% conversion increase'],
+              },
+              {
+                icon: Database,
+                title: 'Inventory Management Sheets',
+                category: 'Systems & Automation',
+                description: 'Built automated inventory tracking systems reducing stockouts by 60%.',
+                objective: 'Create automated inventory tracking across Shopify and eBay.',
+                responsibilities: ['System design', 'Formula creation', 'Automation setup', 'Training'],
+                process: ['Requirements analysis', 'System design', 'Build templates', 'Automate syncs', 'Testing and training'],
+                outcome: '60% reduction in stockouts, real-time visibility.',
+                tools: ['Google Sheets', 'Google Apps Script', 'Excel', 'Shopify Admin'],
+                results: ['60% stockout reduction', 'Real-time sync', 'Automated alerts', 'Custom dashboards'],
+              },
+              {
+                icon: Mail,
+                title: 'Email Management',
+                category: 'Communication',
+                description: 'Managed inbox triage, order confirmations, supplier correspondence, and customer inquiries — keeping the inbox at zero unresolved.',
+                objective: 'Keep the inbox organized and ensure no message goes unanswered, with urgent items actioned the same day.',
+                responsibilities: ['Inbox triage & sorting', 'Order confirmation handling', 'Supplier correspondence', 'Urgent issue flagging', 'Response tracking'],
+                process: ['Inbox review & categorization', 'Order confirmation matching', 'Supplier follow-ups', 'Urgent issue escalation', 'Response drafting & sending'],
+                outcome: 'Maintained a zero-unresolved inbox with same-day response on all urgent items.',
+                tools: ['Gmail', 'Google Sheets', 'Google Workspace', 'Platform Messaging'],
+                results: ['Zero unresolved inbox', 'Same-day urgent response', 'Organized order tracking', 'Improved supplier communication'],
+              },
+            ].map((cs, i) => (
+              <div
+                key={i}
+                className="card-glow group bg-white dark:bg-slate-800 rounded-2xl p-7 border border-slate-200 dark:border-slate-700 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300"
+              >
+                <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/50 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <cs.icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                </div>
+                <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">{cs.category}</span>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{cs.title}</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5">{cs.description}</p>
+
+                <div className="mb-4">
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Objective</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">{cs.objective}</p>
+                </div>
+
+                <div className="mb-4">
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Process</p>
+                  <ol className="space-y-1.5">
+                    {cs.process.map((step, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <span className="w-5 h-5 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center text-xs font-bold text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5">{j + 1}</span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div className="mb-4">
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Tools</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {cs.tools.map((tool) => (
+                      <span key={tool} className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2.5 py-1 rounded-lg">{tool}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-5">
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Outcome</p>
+                  <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">{cs.outcome}</p>
+                </div>
+
+                <div className="border-t border-slate-100 dark:border-slate-700 pt-4">
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Key Results</p>
+                  <ul className="space-y-1.5">
+                    {cs.results.map((r, j) => (
+                      <li key={j} className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                        {r}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Canva Portfolio Link Card */}
+          <div className="mt-12">
+            <a
+              href="https://www.canva.com/design/DAF8nQXR9w0/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col sm:flex-row items-center gap-6 bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
+            >
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                <CanvaLogo className="w-14 h-14" />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-2xl font-bold text-white mb-2">View My Canva Portfolio</h3>
+                <p className="text-slate-400">Explore my visual design work and creative e-commerce projects on Canva.</p>
+              </div>
+              <div className="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-3 transition-all">
+                Open in Canva
+                <ExternalLink className="w-5 h-5" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Why Hire Me Section */}
       <section className="py-20 lg:py-32 bg-emerald-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1773,6 +1909,21 @@ function App() {
                   <div>
                     <p className="text-sm text-slate-500 dark:text-slate-400">OnlineJobs.ph</p>
                     <p className="font-medium text-slate-900 dark:text-white">View Profile</p>
+                  </div>
+                </a>
+
+                <a
+                  href="https://www.canva.com/design/DAF8nQXR9w0/view"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/50 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/70 rounded-xl flex items-center justify-center transition-colors">
+                    <CanvaLogo className="w-7 h-7" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Canva Portfolio</p>
+                    <p className="font-medium text-slate-900 dark:text-white">View My Designs</p>
                   </div>
                 </a>
 
@@ -3464,7 +3615,7 @@ function App() {
       <Modal isOpen={navModal === 'portfolio'} onClose={() => setNavModal(null)} title="Portfolio" size="lg">
         <div className="space-y-5">
           <div className="flex flex-wrap gap-2">
-            {(['Case Studies', 'Product Listings', 'SEO Projects'] as const).map((tab) => (
+            {(['Case Studies', 'Product Listings'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setPortfolioTab(tab)}
@@ -3477,9 +3628,8 @@ function App() {
           <div className="grid sm:grid-cols-2 gap-4 max-h-[50vh] overflow-y-auto pr-1">
             {portfolioProjects
               .filter((p) =>
-                portfolioTab === 'Case Studies' ? ['Research', 'Systems', 'Management'].includes(p.category) :
-                portfolioTab === 'Product Listings' ? p.category === 'Product Listing' :
-                p.category === 'SEO'
+                portfolioTab === 'Case Studies' ? p.category === 'Research' :
+                p.category === 'Product Listing'
               )
               .map((p) => (
                 <div key={p.id} className="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer" onClick={() => { setNavModal(null); setPortfolioModalOpen(p.id); }}>
