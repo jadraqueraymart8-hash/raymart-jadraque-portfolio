@@ -1748,7 +1748,7 @@ function App() {
           {/* Canva Portfolio Link Card */}
           <div className="mt-12">
             <a
-              href="https://www.canva.com/design/DAF8nQXR9w0/view"
+              href="https://canva.link/yfz99n7mvclao8v"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col sm:flex-row items-center gap-6 bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-8 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
@@ -1889,7 +1889,7 @@ function App() {
                 </a>
 
                 <a
-                  href="https://www.canva.com/design/DAF8nQXR9w0/view"
+                  href="https://canva.link/yfz99n7mvclao8v"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-emerald-300 dark:hover:border-emerald-600 transition-colors group"
