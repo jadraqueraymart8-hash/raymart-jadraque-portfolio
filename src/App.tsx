@@ -659,7 +659,10 @@ function App() {
       category: 'Product Listing',
       date: '2025-2026',
       status: 'Completed',
-      screenshots: [],
+      screenshots: [
+        '/images/product-listings/Listing_17.png',
+        '/images/product-listings/LB_02.png',
+      ],
     },
     {
       id: 'product-research',
@@ -678,9 +681,8 @@ function App() {
       date: '2025-2026',
       status: 'Ongoing',
       screenshots: [
-        '/screenshots/customer support resolution/757_number_chat.png',
-        '/screenshots/customer support resolution/chicago_theater_chat.png',
-        '/screenshots/customer support resolution/fort_worth_tx_chat.png',
+        '/customer-support/transcripts/chat/chicago_theater_chat.png',
+        '/customer-support/transcripts/chat/fort_worth_tx_chat.png',
       ],
     },
   ];
