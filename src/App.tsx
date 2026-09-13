@@ -140,20 +140,11 @@ const ZikAnalyticsLogo = ({ className = "w-8 h-8" }: { className?: string }) => 
   </svg>
 );
 
-// Vendoo — official purple heart-V logomark
-const VendooLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="48" height="48" rx="10" fill="#1E0E4B"/>
-    <defs>
-      <linearGradient id="vGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#F97316"/>
-        <stop offset="35%" stopColor="#EC4899"/>
-        <stop offset="70%" stopColor="#8B5CF6"/>
-        <stop offset="100%" stopColor="#06B6D4"/>
-      </linearGradient>
-    </defs>
-    {/* Vendoo V-heart shape */}
-    <path d="M24 36 C24 36 10 25 10 17 C10 12 14 9 18 9 C20.5 9 22.5 10.5 24 13 C25.5 10.5 27.5 9 30 9 C34 9 38 12 38 17 C38 25 24 36 24 36Z" stroke="url(#vGrad)" strokeWidth="3.5" fill="none" strokeLinejoin="round"/>
+// Klaviyo — official green Klaviyo wordmark on dark background
+const KlaviyoLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 120 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="120" height="48" rx="10" fill="#1F1F1F"/>
+    <text x="60" y="32" textAnchor="middle" fontSize="22" fontWeight="700" fontFamily="Arial,sans-serif" fill="#FF7F41">Klaviyo</text>
   </svg>
 );
 
@@ -645,6 +636,9 @@ function App() {
     { name: 'Google Sheets', Logo: GoogleSheetsLogo, experience: 'Expert', description: 'Advanced spreadsheet management for inventory tracking and reporting', tasks: ['Inventory tracking', 'Formulas & automation', 'Dashboards', 'Reporting'] },
     { name: 'Microsoft Excel', Logo: ExcelLogo, experience: 'Advanced', description: 'Professional Excel for data analysis and business reporting', tasks: ['Data organization', 'Pivot tables', 'Reporting', 'Automation'] },
     { name: 'Canva', Logo: CanvaLogo, experience: 'Intermediate', description: 'Graphic design for product images and marketing materials', tasks: ['Image editing', 'Social posts', 'Infographics', 'Templates'] },
+    { name: 'Zik Analytics', Logo: ZikAnalyticsLogo, experience: 'Advanced', description: 'eBay product research and market analysis', tasks: ['Product research', 'Competitor analysis', 'Profit calculation', 'Trend spotting'] },
+    { name: 'Easync', Logo: EasyncLogo, experience: 'Intermediate', description: 'Dropshipping automation and fulfillment', tasks: ['Product sourcing', 'Order automation', 'Price monitoring', 'Inventory sync'] },
+    { name: 'Klaviyo', Logo: KlaviyoLogo, experience: 'Intermediate', description: 'Email marketing and customer engagement automation', tasks: ['Email campaigns', 'Flow automation', 'Audience segmentation', 'Performance tracking'] },
     { name: 'Bookkeeping & QuickBooks', Logo: QuickBooksLogo, experience: 'In Progress', description: 'Currently learning QuickBooks for financial management', tasks: ['Income tracking', 'Expense management', 'Reporting', 'Invoicing'] },
   ];
 
@@ -663,7 +657,7 @@ function App() {
       skills: ['Shopify Management', 'SEO', 'Data Entry', 'Image Optimization'],
       results: ['500+ products listed', '50% visibility increase', '30% conversion improvement', 'Reduced setup time by 40%'],
       category: 'Product Listing',
-      date: '2024',
+      date: '2025-2026',
       status: 'Completed',
       screenshots: [],
     },
@@ -681,7 +675,7 @@ function App() {
       skills: ['Customer Service', 'Problem Solving', 'Communication', 'Ticket Management'],
       results: ['High satisfaction rate', 'Reduced response time', 'Repeat customer retention', 'Clean resolution records'],
       category: 'Research',
-      date: '2024',
+      date: '2025-2026',
       status: 'Ongoing',
       screenshots: [
         '/screenshots/customer support resolution/757_number_chat.png',
@@ -1050,9 +1044,16 @@ function App() {
                     {[
                       { src: '/logos/shopify/image.png', alt: 'Shopify', bg: 'bg-white' },
                       { src: '/logos/ebay/image.png', alt: 'eBay', bg: 'bg-white' },
+                      { Logo: KlaviyoLogo, alt: 'Klaviyo' },
+                      { Logo: EasyncLogo, alt: 'Easync' },
+                      { Logo: ZikAnalyticsLogo, alt: 'Zik Analytics' },
                     ].map((p) => (
-                      <div key={p.alt} className={`w-11 h-11 ${p.bg} rounded-xl shadow-md flex items-center justify-center p-2 border border-white/10`}>
-                        <img src={p.src} alt={p.alt} className="w-full h-full object-contain" />
+                      <div key={p.alt} className={`w-11 h-11 ${p.bg ?? 'bg-slate-900'} rounded-xl shadow-md flex items-center justify-center p-2 border border-white/10`}>
+                        {'src' in p ? (
+                          <img src={p.src} alt={p.alt} className="w-full h-full object-contain" />
+                        ) : (
+                          <p.Logo className="w-full h-full" />
+                        )}
                       </div>
                     ))}
                   </div>
@@ -1465,13 +1466,13 @@ function App() {
               <div className="md:flex">
                 <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden bg-slate-200 dark:bg-slate-700 flex-shrink-0">
                   <img
-                    src="/screenshots/portfolio/AG_22.png"
+                    src="/screenshots/portfolio/AG_hero.png"
                     alt="Art Geometry Hero"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-900/20" />
                   <div className="absolute bottom-3 left-3 flex gap-2">
-                    {['/screenshots/portfolio/AG_20.png', '/screenshots/portfolio/AG_21.png', '/screenshots/portfolio/AG_23.png'].map((src, i) => (
+                    {['/screenshots/portfolio/AG_essentials_grid.png', '/screenshots/portfolio/AG_geosetup.png', '/screenshots/portfolio/AG_featured_products.png'].map((src, i) => (
                       <div key={i} className="w-14 h-10 rounded-lg overflow-hidden ring-2 ring-white/70 shadow-md">
                         <img src={src} alt="" className="w-full h-full object-cover" />
                       </div>
@@ -1527,13 +1528,13 @@ function App() {
               <div className="md:flex">
                 <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden bg-slate-200 dark:bg-slate-700 flex-shrink-0">
                   <img
-                    src="/screenshots/portfolio/LB_05.png"
+                    src="/screenshots/portfolio/LB_hero_1.png"
                     alt="Lumière Beauty Hero"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-rose-900/20" />
                   <div className="absolute bottom-3 left-3 flex gap-2">
-                    {['/screenshots/portfolio/LB_04.png', '/screenshots/portfolio/LB_06.png', '/screenshots/portfolio/LB_07.png'].map((src, i) => (
+                    {['/screenshots/portfolio/LB_hero_2.png', '/screenshots/portfolio/LB_product_gua_sha.png', '/screenshots/portfolio/LB_featured_collections.png'].map((src, i) => (
                       <div key={i} className="w-14 h-10 rounded-lg overflow-hidden ring-2 ring-white/70 shadow-md">
                         <img src={src} alt="" className="w-full h-full object-cover" />
                       </div>
@@ -3171,7 +3172,7 @@ function App() {
           <div className="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 rounded-2xl overflow-hidden mb-10 p-8 lg:p-12">
             <div className="absolute inset-0 opacity-10">
               <img
-                src="/screenshots/portfolio/AG_22.png"
+                src="/screenshots/portfolio/AG_hero.png"
                 alt=""
                 className="w-full h-full object-cover object-top"
               />
@@ -3206,7 +3207,7 @@ function App() {
             <div className="grid lg:grid-cols-5 gap-6 items-start">
               <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
                 <img
-                  src="/screenshots/portfolio/AG_22.png"
+                  src="/screenshots/portfolio/AG_hero.png"
                   alt="Art Geometry Hero and Trust Badges"
                   className="w-full object-cover"
                 />
@@ -3258,7 +3259,7 @@ function App() {
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
               <img
-                src="/screenshots/portfolio/AG_20.png"
+                src="/screenshots/portfolio/AG_essentials_grid.png"
                 alt="Art Geometry Collections Grid"
                 className="w-full object-cover"
               />
@@ -3269,7 +3270,7 @@ function App() {
           <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
               <img
-                src="/screenshots/portfolio/AG_21.png"
+                src="/screenshots/portfolio/AG_geosetup.png"
                 alt="ArtSETUP Desk Space Section"
                 className="w-full object-cover"
               />
@@ -3324,7 +3325,7 @@ function App() {
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
               <img
-                src="/screenshots/portfolio/AG_23.png"
+                src="/screenshots/portfolio/AG_testimonials_faq.png"
                 alt="Art Geometry Reviews and FAQ"
                 className="w-full object-cover"
               />
@@ -3335,7 +3336,7 @@ function App() {
           <div className="mb-10 grid lg:grid-cols-2 gap-8 items-start">
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
               <img
-                src="/screenshots/portfolio/AG_24.png"
+                src="/screenshots/portfolio/AG_faq_newsletter.png"
                 alt="Art Geometry Community and Footer"
                 className="w-full object-cover"
               />
@@ -3361,6 +3362,39 @@ function App() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          {/* ── SECTION 6: Product Catalog ── */}
+          <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2 block">06 · Product Catalog</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">A Clean, Shoppable Product Lineup</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                The product catalog was organized with accurate titles, consistent imagery, and clean pricing across all categories. Each product page was built to load fast and present all the information a buyer needs to make a confident purchase decision.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { title: 'Consistent Presentation', desc: 'Every product follows the same title, image, and pricing format for a professional catalog' },
+                  { title: 'Category Alignment', desc: 'Products mapped to the correct collections so filtering and browsing work flawlessly' },
+                  { title: 'Conversion-Ready', desc: 'Clear CTAs, variant selectors, and trust signals on every product page' },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{item.title}: </span>
+                      <span className="text-slate-600 dark:text-slate-400 text-sm">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
+              <img
+                src="/screenshots/portfolio/AG_catalog.png"
+                alt="Art Geometry Product Catalog"
+                className="w-full object-cover"
+              />
             </div>
           </div>
 
@@ -3400,7 +3434,7 @@ function App() {
           {/* Hero Header */}
           <div className="relative bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 rounded-2xl overflow-hidden mb-10 p-8 lg:p-12">
             <div className="absolute inset-0 opacity-10">
-              <img src="/screenshots/portfolio/LB_08.png" alt="" className="w-full h-full object-cover object-top" />
+              <img src="/screenshots/portfolio/LB_hero_1.png" alt="" className="w-full h-full object-cover object-top" />
             </div>
             <div className="relative z-10 max-w-3xl">
               <div className="flex items-center gap-3 mb-4">
@@ -3450,14 +3484,14 @@ function App() {
               </ul>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-              <img src="/screenshots/portfolio/LB_08.png" alt="Lumière Beauty Hero" className="w-full object-cover" />
+              <img src="/screenshots/portfolio/LB_hero_1.png" alt="Lumière Beauty Hero" className="w-full object-cover" />
             </div>
           </div>
 
           {/* Section 2 — Product Collections & Category Nav */}
           <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-              <img src="/screenshots/portfolio/LB_04.png" alt="Lumière Beauty Collections" className="w-full object-cover" />
+              <img src="/screenshots/portfolio/LB_featured_collections.png" alt="Lumière Beauty Collections" className="w-full object-cover" />
             </div>
             <div className="order-1 lg:order-2">
               <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-widest mb-2 block">02 · Product Collections & Category Navigation</span>
@@ -3506,14 +3540,14 @@ function App() {
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-              <img src="/screenshots/portfolio/LB_05.png" alt="Lumière Beauty Category Navigation" className="w-full object-cover" />
+              <img src="/screenshots/portfolio/LB_product_gua_sha.png" alt="Lumière Beauty Category Navigation" className="w-full object-cover" />
             </div>
           </div>
 
           {/* Section 4 — Made For Glow Editorial */}
           <div className="mb-10 grid lg:grid-cols-2 gap-8 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-              <img src="/screenshots/portfolio/LB_06.png" alt="Lumière Beauty Made For Glow" className="w-full object-cover" />
+              <img src="/screenshots/portfolio/LB_featured_collections.png" alt="Lumière Beauty Made For Glow" className="w-full object-cover" />
             </div>
             <div className="order-1 lg:order-2">
               <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-widest mb-2 block">04 · "Made For Glow" Editorial Section</span>
@@ -3545,7 +3579,7 @@ function App() {
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Urgency That Converts</h3>
             <div className="grid lg:grid-cols-5 gap-6 items-start">
               <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-                <img src="/screenshots/portfolio/LB_07.png" alt="Lumière Beauty Flash Sale" className="w-full object-cover" />
+                <img src="/screenshots/portfolio/LB_hero_2.png" alt="Lumière Beauty Flash Sale" className="w-full object-cover" />
               </div>
               <div className="lg:col-span-2 space-y-4">
                 <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
