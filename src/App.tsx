@@ -700,7 +700,7 @@ function App() {
 
   const testimonials = [
     {
-      name: 'Sarah M.',
+      name: 'Roxan J.',
       role: 'E-Commerce Store Owner',
       content: 'Raymart transformed our product listings and helped us increase sales by 35%. His attention to detail and SEO expertise are unmatched. Highly recommend for any e-commerce business looking to scale.',
       rating: 5,
@@ -1662,7 +1662,7 @@ function App() {
                 responsibilities: ['Keyword research', 'Title optimization', 'Description rewriting', 'Backend keyword implementation'],
                 process: ['Competitor analysis', 'Keyword gap research', 'Title A/B testing', 'Bulk optimization', 'Performance tracking'],
                 outcome: '40% improvement in search rankings within 60 days.',
-                tools: ['eBay Seller Hub', 'Keyword Tools', 'Google Trends'],
+                tools: ['eBay Seller Hub', 'Zik Analytics', 'Google Trends'],
                 results: ['40% ranking improvement', '2x organic traffic', '25% conversion increase'],
               },
               {
@@ -1674,7 +1674,7 @@ function App() {
                 responsibilities: ['System design', 'Formula creation', 'Automation setup', 'Training'],
                 process: ['Requirements analysis', 'System design', 'Build templates', 'Automate syncs', 'Testing and training'],
                 outcome: '60% reduction in stockouts, real-time visibility.',
-                tools: ['Google Sheets', 'Google Apps Script', 'Excel', 'Shopify Admin'],
+                tools: ['Google Sheets', 'Easync Automation', 'Excel', 'Shopify Admin'],
                 results: ['60% stockout reduction', 'Real-time sync', 'Automated alerts', 'Custom dashboards'],
               },
               {
@@ -1686,8 +1686,8 @@ function App() {
                 responsibilities: ['Inbox triage & sorting', 'Order confirmation handling', 'Supplier correspondence', 'Urgent issue flagging', 'Response tracking'],
                 process: ['Inbox review & categorization', 'Order confirmation matching', 'Supplier follow-ups', 'Urgent issue escalation', 'Response drafting & sending'],
                 outcome: 'Maintained a zero-unresolved inbox with same-day response on all urgent items.',
-                tools: ['Gmail', 'Google Sheets', 'Google Workspace', 'Platform Messaging'],
-                results: ['Zero unresolved inbox', 'Same-day urgent response', 'Organized order tracking', 'Improved supplier communication'],
+                tools: ['Gmail', 'Klaviyo', 'Google Workspace', 'Platform Messaging'],
+                results: ['Email Automation', 'Same-day urgent response', 'Organized order tracking', 'Improved CRM'],
               },
             ].map((cs, i) => (
               <div
