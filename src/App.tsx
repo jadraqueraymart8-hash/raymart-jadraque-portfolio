@@ -1591,13 +1591,12 @@ function App() {
                 className="card-glow group bg-slate-50 dark:bg-slate-700 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-slate-900/5 transition-all text-left"
               >
                 {project.screenshots.length > 0 ? (
-                  <div className="h-40 relative overflow-hidden bg-slate-200 dark:bg-slate-600">
+                  <div className="h-48 relative overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center p-2">
                     <img
                       src={project.screenshots[0]}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     <div className="absolute bottom-2 right-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
                       {project.screenshots.length} screenshot{project.screenshots.length !== 1 ? 's' : ''}
                     </div>
@@ -2487,15 +2486,19 @@ function App() {
                 {/* Screenshots */}
                 {project.screenshots.length > 0 ? (
                   <div className="space-y-3">
-                    <img
-                      src={project.screenshots[0]}
-                      alt={`${project.title} screenshot`}
-                      className="w-full rounded-2xl object-cover max-h-80"
-                    />
+                    <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+                      <img
+                        src={project.screenshots[0]}
+                        alt={`${project.title} screenshot`}
+                        className="w-full object-contain max-h-[28rem]"
+                      />
+                    </div>
                     {project.screenshots.length > 1 && (
-                      <div className="grid grid-cols-4 gap-2">
+                      <div className="grid grid-cols-2 gap-3">
                         {project.screenshots.slice(1).map((src, i) => (
-                          <img key={i} src={src} alt={`Screenshot ${i + 2}`} className="rounded-xl object-cover h-20 w-full" />
+                          <div key={i} className="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+                            <img key={i} src={src} alt={`Screenshot ${i + 2}`} className="w-full object-contain max-h-48" />
+                          </div>
                         ))}
                       </div>
                     )}
