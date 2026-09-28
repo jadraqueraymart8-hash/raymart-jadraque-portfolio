@@ -707,7 +707,7 @@ function App() {
       fullContent: 'Working with Raymart has been an absolute game-changer for our Shopify store. He took the time to understand our products, conducted thorough keyword research, and optimized over 500 listings. Our organic traffic increased by 50%, and conversions improved by 35%. His communication is excellent, deadlines are always met, and the quality of work exceeds expectations. I cannot recommend him enough for any e-commerce business looking to scale efficiently.',
     },
     {
-      name: 'David K.',
+      name: 'David Choi',
       role: 'eBay Store Owner',
       content: 'Raymart streamlined our order fulfillment and customer support across eBay. Response times dropped and buyer satisfaction went up. Fast, reliable, and always organized.',
       rating: 5,
