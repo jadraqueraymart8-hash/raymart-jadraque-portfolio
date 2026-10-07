@@ -1584,7 +1584,9 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {portfolioProjects.map((project) => (
+            {portfolioProjects
+              .filter((project) => project.id !== 'shopify-listings' && project.id !== 'product-research')
+              .map((project) => (
               <button
                 key={project.id}
                 onClick={() => setPortfolioModalOpen(project.id)}
@@ -1631,6 +1633,35 @@ function App() {
                 </div>
               </button>
             ))}
+            <a
+              href="https://canva.link/q02ypbo55jk6gjn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Product Listing and Customer Support Canva Portfolio"
+              className="card-glow group bg-slate-50 dark:bg-slate-700 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-slate-900/5 transition-all text-left"
+            >
+              <div className="h-48 bg-gradient-to-br from-cyan-100 via-white to-emerald-100 dark:from-slate-600 dark:via-slate-700 dark:to-slate-800 flex items-center justify-center relative overflow-hidden">
+                <div className="w-20 h-20 bg-white dark:bg-slate-800 rounded-2xl shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <CanvaLogo className="w-12 h-12" />
+                </div>
+                <div className="absolute bottom-2 right-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
+                  Please Click
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <span className="text-xs font-medium bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 px-2 py-1 rounded-full">
+                    Canva Portfolio
+                  </span>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Product Listing &amp; Customer Support</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400">View my product listing and customer support work in my Canva portfolio.</p>
+                <div className="mt-4 flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-sm font-medium">
+                  Please Click
+                  <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </section>
