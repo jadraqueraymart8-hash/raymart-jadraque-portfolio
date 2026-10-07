@@ -1583,7 +1583,7 @@ function App() {
             </button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#0f172a]">
             {portfolioProjects
               .filter((project) => project.id !== 'shopify-listings' && project.id !== 'product-research')
               .map((project) => (
@@ -1659,6 +1659,27 @@ function App() {
                 <div className="mt-4 flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-sm font-medium">
                   Please Click
                   <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </a>
+            <a
+              href="https://canva.link/q02ypbo55jk6gjn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Canva Portfolio"
+              className="group relative min-h-[20rem] overflow-hidden rounded-2xl bg-slate-900"
+            >
+              <img
+                src="/images/image copy.png"
+                alt="Canva Portfolio"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-slate-950/65 transition-colors duration-300 group-hover:bg-slate-950/50" />
+              <div className="relative flex h-full min-h-[20rem] items-center justify-center p-6 text-center">
+                <div>
+                  <CanvaLogo className="mx-auto mb-4 h-12 w-12" />
+                  <h3 className="text-2xl font-bold text-white">Canva Portfolio</h3>
+                  <p className="mt-2 text-sm font-medium text-white/85">Click to view my work</p>
                 </div>
               </div>
             </a>
