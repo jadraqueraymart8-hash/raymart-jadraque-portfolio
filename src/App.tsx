@@ -1675,7 +1675,7 @@ function App() {
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-slate-950/65 transition-colors duration-300 group-hover:bg-slate-950/50" />
-              <div className="absolute inset-0 flex h-full w-full items-center justify-center p-6 text-center">
+              <div className="absolute inset-0 z-10 flex h-full w-full items-center justify-center rounded-2xl bg-slate-950/45 p-6 text-center backdrop-blur-[1px]">
                 <div>
                   <CanvaLogo className="mx-auto mb-4 h-12 w-12" />
                   <h3 className="text-2xl font-bold text-white">Canva Portfolio</h3>
