@@ -2,8 +2,10 @@ import { useState } from 'react';
 
 export default function ContourIntro({ onComplete }: { onComplete: () => void }) {
   const [leaving, setLeaving] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleEnter = () => {
+    setLoading(true);
     setLeaving(true);
     setTimeout(onComplete, 700);
   };
@@ -52,25 +54,31 @@ export default function ContourIntro({ onComplete }: { onComplete: () => void })
       <div className="absolute w-[500px] h-[500px] rounded-full bg-white/5 blur-[100px] pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6">
-        <p className="text-white/50 text-sm font-medium uppercase tracking-[0.3em] mb-6 animate-pulse">
-          E-Commerce Virtual Assistant
-        </p>
-        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-3">
-          Raymart Jadraque
-        </h1>
-        <p className="text-white/40 text-lg mb-10 max-w-md mx-auto">
-          Shopify &amp; eBay specialist — product listing, order fulfillment, customer support, and general e-commerce support.
-        </p>
-        <button
-          onClick={handleEnter}
-          className="group relative inline-flex items-center gap-3 px-10 py-4 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all hover:scale-105 shadow-2xl shadow-white/10"
-        >
-          Enter Portfolio
-          <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
-        </button>
-        <p className="text-white/30 text-xs mt-8 tracking-wide">$5–$15 / hour</p>
-      </div>
+      {loading ? (
+        <div className="relative z-10 flex items-center justify-center" role="status" aria-label="Loading portfolio">
+          <div className="h-14 w-14 animate-spin rounded-full border-4 border-white/20 border-t-white" />
+        </div>
+      ) : (
+        <div className="relative z-10 text-center px-6">
+          <p className="text-white/50 text-sm font-medium uppercase tracking-[0.3em] mb-6 animate-pulse">
+            E-Commerce Virtual Assistant
+          </p>
+          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-3">
+            Raymart Jadraque
+          </h1>
+          <p className="text-white/40 text-lg mb-10 max-w-md mx-auto">
+            Shopify &amp; eBay specialist — product listing, order fulfillment, customer support, and general e-commerce support.
+          </p>
+          <button
+            onClick={handleEnter}
+            className="group relative inline-flex items-center gap-3 px-10 py-4 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all hover:scale-105 shadow-2xl shadow-white/10"
+          >
+            Enter Portfolio
+            <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
+          </button>
+          <p className="text-white/30 text-xs mt-8 tracking-wide">$5–$15 / hour</p>
+        </div>
+      )}
     </div>
   );
 }
