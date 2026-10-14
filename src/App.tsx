@@ -782,11 +782,11 @@ function App() {
         setFormData({ name: '', email: '', message: '' });
       } else {
         setFormStatus('error');
-        setFormError('Something went wrong sending your message. Please try again or email me directly.');
+        setFormError('Something went wrong. Please try again or email me at jadraqueraymart8@gmail.com.');
       }
     } catch {
       setFormStatus('error');
-      setFormError('Network error. Please check your connection and try again.');
+      setFormError('Something went wrong. Please try again or email me at jadraqueraymart8@gmail.com.');
     }
   };
 
@@ -1476,7 +1476,7 @@ function App() {
                   <div className="absolute bottom-3 left-3 flex gap-2">
                     {['/screenshots/portfolio/AG_essentials_grid.png', '/screenshots/portfolio/AG_geosetup.png', '/screenshots/portfolio/AG_featured_products.png'].map((src, i) => (
                       <div key={i} className="w-14 h-10 rounded-lg overflow-hidden ring-2 ring-white/70 shadow-md">
-                        <img src={src} alt="" className="w-full h-full object-cover" />
+                        <img src={src} alt="Art Geometry store screenshot" className="w-full h-full object-cover" />
                       </div>
                     ))}
                     <div className="w-14 h-10 rounded-lg bg-black/50 backdrop-blur-sm ring-2 ring-white/70 flex items-center justify-center">
@@ -1538,7 +1538,7 @@ function App() {
                   <div className="absolute bottom-3 left-3 flex gap-2">
                     {['/screenshots/portfolio/LB_hero_2.png', '/screenshots/portfolio/LB_product_gua_sha.png', '/screenshots/portfolio/LB_featured_collections.png'].map((src, i) => (
                       <div key={i} className="w-14 h-10 rounded-lg overflow-hidden ring-2 ring-white/70 shadow-md">
-                        <img src={src} alt="" className="w-full h-full object-cover" />
+                        <img src={src} alt="Lumière Beauty store screenshot" className="w-full h-full object-cover" />
                       </div>
                     ))}
                     <div className="w-14 h-10 rounded-lg bg-black/50 backdrop-blur-sm ring-2 ring-white/70 flex items-center justify-center">
@@ -1994,8 +1994,7 @@ function App() {
                     <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
                       <CheckCircle2 className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
                     </div>
-                    <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Message Sent!</h4>
-                    <p className="text-slate-600 dark:text-slate-400">I'll get back to you within 24 hours.</p>
+                    <p className="text-slate-700 dark:text-slate-200 font-medium">Thanks, your message was sent. I will reply as soon as I can.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
@@ -3767,12 +3766,28 @@ function App() {
             ))}
           </div>
           {contactTab === 'Send a Message' ? (
-            <form onSubmit={(e) => { e.preventDefault(); setFormSubmitted(true); }} className="space-y-3">
-              <input required placeholder="Your name" className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-900 dark:text-white" />
-              <input required type="email" placeholder="Your email" className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-900 dark:text-white" />
-              <textarea required placeholder="Your message" rows={4} className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-900 dark:text-white" />
-              <button type="submit" className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-colors">Send Message</button>
-              {formSubmitted && <p className="text-emerald-600 dark:text-emerald-400 text-sm text-center">Thanks! I'll be in touch soon.</p>}
+            <form onSubmit={handleSubmit} className="space-y-3">
+              {formStatus === 'success' ? (
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700/50">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                  <p className="text-sm text-emerald-700 dark:text-emerald-400">Thanks, your message was sent. I will reply as soon as I can.</p>
+                </div>
+              ) : (
+                <>
+                  <input required type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Your name" className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-900 dark:text-white" />
+                  <input required type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="Your email" className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-900 dark:text-white" />
+                  <textarea required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Your message" rows={4} className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-slate-900 dark:text-white" />
+                  {formStatus === 'error' && (
+                    <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700/50">
+                      <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0" />
+                      <p className="text-sm text-red-700 dark:text-red-400">{formError}</p>
+                    </div>
+                  )}
+                  <button type="submit" disabled={formStatus === 'submitting'} className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                    {formStatus === 'submitting' ? (<><Loader2 className="w-4 h-4 animate-spin" />Sending...</>) : 'Send Message'}
+                  </button>
+                </>
+              )}
             </form>
           ) : (
             <div className="space-y-3">
