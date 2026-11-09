@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import ContourIntro from './ContourIntro';
 import EcommerceBackground from './EcommerceBackground';
+import ParticleField from './ParticleField';
 import { cn } from './lib/utils';
 import { Mail, Phone, Calendar, FileText, Download, ExternalLink, ShoppingBag, Search, TrendingUp, RefreshCw, Package, BarChart3, Database, FileSpreadsheet, PenTool, Users, Target, Zap, Award, Clock, Shield, Star, ChevronUp, Menu, X, CheckCircle2, Layers, Box, Globe, Briefcase, Send, ChevronLeft, ChevronRight, ZoomIn, Settings, Sun, Moon, Sparkles, Eye, Play, Pause, Maximize2, XCircle, Info, AlertCircle, MessageSquare, Building2, DollarSign, Clock3, ArrowRight, Heart, ThumbsUp, Monitor, LayoutGrid, List, FileImage, ImageOff, CreditCard as Edit3, Lightbulb, Lock, HelpCircle, FileDown, Loader2 } from 'lucide-react';
 
@@ -986,6 +987,9 @@ function App() {
         {/* Grid pattern overlay */}
         <div className="absolute inset-0 hero-grid-pattern animate-grid-fade" />
 
+        {/* Interactive particle network */}
+        <ParticleField />
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
             {/* LEFT — Intro */}
@@ -1003,7 +1007,7 @@ function App() {
 
               <Reveal delay={150}>
                 <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] mb-4 tracking-tight">
-                  Raymart Jadraque
+                  <span className="gradient-text">Raymart Jadraque</span>
                 </h1>
               </Reveal>
 
@@ -1123,6 +1127,27 @@ function App() {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
           <div className="w-6 h-10 border-2 border-blue-400/50 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-3 bg-blue-400 rounded-full animate-scroll" />
+          </div>
+        </div>
+      </section>
+
+      {/* Tools Marquee Strip */}
+      <section className="relative py-10 bg-slate-950 border-y border-white/5 overflow-hidden">
+        <div className="marquee-wrapper relative">
+          <div className="absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-slate-950 to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-slate-950 to-transparent pointer-events-none" />
+          <div className="marquee-track gap-8 px-4">
+            {[...toolsData, ...toolsData].map((tool, index) => (
+              <div
+                key={`${tool.name}-${index}`}
+                className="flex items-center gap-3 bg-slate-900/60 border border-white/10 rounded-2xl px-6 py-3 backdrop-blur-sm shrink-0"
+              >
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-800/60">
+                  <tool.Logo className="w-7 h-7" />
+                </div>
+                <span className="text-slate-300 font-medium text-sm whitespace-nowrap">{tool.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

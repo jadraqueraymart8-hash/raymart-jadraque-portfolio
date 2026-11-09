@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import NotFound from './NotFound.tsx';
 import './index.css';
+import './animations.css';
 
 function Root() {
   const path = window.location.pathname;
