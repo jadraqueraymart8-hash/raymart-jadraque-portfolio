@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Subtle grid -->
+  <pattern id="grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff08" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Accent glow blob -->
+  <ellipse cx="900" cy="200" rx="380" ry="280" fill="#10b98118"/>
+  <!-- Left bar -->
+  <rect x="80" y="180" width="6" height="270" rx="3" fill="url(#accent)"/>
+  <!-- Name -->
+  <text x="120" y="290" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="80" fill="#ffffff" letter-spacing="-2">Raymart Jadraque</text>
+  <!-- Role -->
+  <text x="122" y="360" font-family="Inter,system-ui,sans-serif" font-weight="500" font-size="36" fill="#10b981">E-Commerce &amp; Customer Support Specialist</text>
+  <!-- Tagline -->
+  <text x="122" y="420" font-family="Inter,system-ui,sans-serif" font-weight="400" font-size="26" fill="#94a3b8">Helping online stores scale through Shopify, eBay &amp; beyond.</text>
+  <!-- Initials badge -->
+  <rect x="80" y="80" width="76" height="76" rx="18" fill="url(#accent)"/>
+  <text x="118" y="133" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="34" fill="#ffffff" text-anchor="middle">RJ</text>
+  <!-- Bottom border -->
+  <rect x="0" y="610" width="1200" height="20" fill="url(#accent)"/>
+</svg>
