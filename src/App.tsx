@@ -3,6 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import ContourIntro from './ContourIntro';
 import EcommerceBackground from './EcommerceBackground';
 import ParticleField from './ParticleField';
+import SectionBackground from './SectionBackground';
 import { cn } from './lib/utils';
 import { Mail, Phone, Calendar, FileText, Download, ExternalLink, ShoppingBag, Search, TrendingUp, RefreshCw, Package, BarChart3, Database, FileSpreadsheet, PenTool, Users, Target, Zap, Award, Clock, Shield, Star, ChevronUp, Menu, X, CheckCircle2, Layers, Box, Globe, Briefcase, Send, ChevronLeft, ChevronRight, ZoomIn, Settings, Sun, Moon, Sparkles, Eye, Play, Pause, Maximize2, XCircle, Info, AlertCircle, MessageSquare, Building2, DollarSign, Clock3, ArrowRight, Heart, ThumbsUp, Monitor, LayoutGrid, List, FileImage, ImageOff, CreditCard as Edit3, Lightbulb, Lock, HelpCircle, FileDown, Loader2 } from 'lucide-react';
 
@@ -1153,8 +1154,9 @@ function App() {
       </section>
 
       {/* Results / How I Help Section */}
-      <section className="py-20 lg:py-28 bg-emerald-50 dark:bg-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 lg:py-28 bg-emerald-50 dark:bg-slate-800 overflow-hidden">
+        <SectionBackground variant="emerald" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">Results That Matter</span>
@@ -1207,8 +1209,9 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 lg:py-32 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="about" className="relative py-20 lg:py-32 bg-white dark:bg-slate-900 overflow-hidden">
+        <SectionBackground variant="light" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
@@ -1292,8 +1295,9 @@ function App() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="skills" className="relative py-20 lg:py-32 bg-slate-50 dark:bg-slate-800 overflow-hidden">
+        <SectionBackground variant="blue" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/50 border border-blue-200 dark:border-blue-700/50 rounded-full px-4 py-1.5 mb-6">
               <span className="text-sm font-medium text-blue-700 dark:text-blue-400">My Expertise</span>
@@ -1348,8 +1352,9 @@ function App() {
       </section>
 
       {/* Tools & Platforms Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-b from-slate-900 to-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 lg:py-32 bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
+        <SectionBackground variant="dark" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-blue-900/50 border border-blue-700/50 rounded-full px-4 py-1.5 mb-6">
               <span className="text-sm font-medium text-blue-400">Tech Stack</span>
@@ -1386,8 +1391,9 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="services" className="relative py-20 lg:py-32 bg-slate-50 dark:bg-slate-900 overflow-hidden">
+        <SectionBackground variant="emerald" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">What I Offer</span>
@@ -1423,8 +1429,9 @@ function App() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 lg:py-32 bg-white dark:bg-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="portfolio" className="relative py-20 lg:py-32 bg-white dark:bg-slate-800 overflow-hidden">
+        <SectionBackground variant="blue" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">My Work</span>
@@ -1714,6 +1721,7 @@ function App() {
 
       {/* Case Studies Section — SEO, Inventory, Email (no photos) */}
       <section id="case-studies" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900 relative overflow-hidden">
+        <SectionBackground variant="blue" />
         <EcommerceBackground />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -1849,8 +1857,9 @@ function App() {
       </section>
 
       {/* Why Hire Me Section */}
-      <section className="py-20 lg:py-32 bg-emerald-50 dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 lg:py-32 bg-emerald-50 dark:bg-slate-900 overflow-hidden">
+        <SectionBackground variant="emerald" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">Why RayVA</span>
@@ -1881,8 +1890,9 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 lg:py-32 bg-white dark:bg-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 lg:py-32 bg-white dark:bg-slate-800 overflow-hidden">
+        <SectionBackground variant="light" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
               <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">Client Feedback</span>
@@ -1924,8 +1934,9 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="relative py-20 lg:py-32 bg-slate-50 dark:bg-slate-900 overflow-hidden">
+        <SectionBackground variant="blue" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             <div>
               <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700/50 rounded-full px-4 py-1.5 mb-6">
